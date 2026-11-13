@@ -23,6 +23,14 @@
         "name": "Newington Marketplace",
         "suburb": "Newington",
         "note": "My first proper market stall!"
+      },
+      {
+        "date": "",
+        "start": "09:00",
+        "end": "13:00",
+        "name": "New market",
+        "suburb": "",
+        "note": ""
       }
     ],
     "mapButton": "Map",
@@ -40,10 +48,10 @@
     "faves": [
       "biscuits",
       "chocolate cakes",
-      "lemon cheesecakes",
       "muffins",
       "cupcakes",
-      "donuts"
+      "donuts",
+      "cheesecakes"
     ],
     "p3": "Making people smile with my treats is my favourite thing to do!",
     "sign": "Maddy x",
@@ -82,7 +90,7 @@
   "treats": {
     "kicker": "What I bake",
     "title": "Sweet treats",
-    "intro": "Everything is baked by me, with lots of love (and lots of sprinkles).",
+    "intro": "Everything is baked by me, with lots of love",
     "items": [
       {
         "img": {
@@ -118,7 +126,7 @@
         },
         "title": "Cute biscuits",
         "text": "Biscuits with cheeky little faces that always make people smile.",
-        "button": "Order cute biscuits"
+        "button": "Order biscuits"
       }
     ]
   },
@@ -193,7 +201,7 @@
   "thanks": {
     "title": "Thank you, people of Earth!",
     "p1": "Thanks for visiting! We hope you're leaving inspired to treat yourself.",
-    "p2": "If you're craving more, don't hesitate to reach out. I would love to sweeten your day even more!",
+    "p2": "If you're craving more, get in touch. I would love to sweeten your day even more!",
     "button": "Back to the top"
   }
 }
