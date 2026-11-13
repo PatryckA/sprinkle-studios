@@ -122,7 +122,7 @@
   .treat h3{font-size:1.45rem;margin-bottom:.3em}
   .treat p{margin:0 0 16px;color:var(--ink-soft);font-weight:600;font-size:.98rem;flex:1}
   .treat .btn{padding:9px 18px;font-size:.92rem;margin:0}
-  .treat .tag{display:inline-block;background:var(--pink);color:#fff;font-weight:800;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin:-6px 0 8px}
+  .treat .tag-unused{display:inline-block;background:var(--pink);color:#fff;font-weight:800;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin:-6px 0 8px}
   @media (max-width:900px){.treat-grid{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:480px){.treat-grid{gap:12px}.treat{padding:16px 10px}.treat img{width:110px;height:110px}.treat h3{font-size:1.2rem}.treat p{font-size:.88rem}.treat .lg{display:none}}
 
@@ -318,10 +318,9 @@
         </article>
         <article class="treat reveal">
           <img src="images/dog-biscuits.jpg" alt="Biscuits shaped like puppy faces" loading="lazy">
-          <span class="tag">Signature</span>
-          <h3>Dog biscuits</h3>
-          <p>My signature treat! Cheeky puppy-face biscuits that always make people smile.</p>
-          <a class="btn btn-pink pop" href="#order" data-choice="Dog shaped biscuits">Order<span class="lg"> dog biscuits</span></a>
+          <h3>Cute biscuits</h3>
+          <p>Biscuits with cheeky little faces that always make people smile.</p>
+          <a class="btn btn-pink pop" href="#order" data-choice="Dog shaped biscuits">Order<span class="lg"> cute biscuits</span></a>
         </article>
       </div>
     </div>
@@ -446,7 +445,7 @@ const GALLERY = [
   { video: "images/flower-biscuits.mp4", poster: "images/flower-biscuits-poster.jpg", caption: "Flower puzzle biscuits", big: true },
   { src: "images/beach-cake.jpg", caption: "Beach party cake" },
   { src: "images/rainbow-cupcakes.jpg", caption: "Rainbow & Easter cupcakes" },
-  { src: "images/dog-biscuits.jpg", caption: "Dog biscuits" },
+  { src: "images/dog-biscuits.jpg", caption: "Cute biscuits" },
   { src: "images/reindeer-biscuits.jpg", caption: "Reindeer biscuits" },
   { src: "images/pink-cookie-layer-cake.jpg", caption: "Pink cookie layer cake" },
   { src: "images/berry-pavlova.jpg", caption: "Berry pavlova" },
@@ -474,6 +473,8 @@ const GOOGLE_FORM_FIELDS = {
   else:   "entry.1363397469",
 };
 // The choices must match the Google Form options exactly.
+// How a choice is shown on the website (if different from the Google Form wording).
+const CHOICE_LABELS = { "Dog shaped biscuits": "Cute biscuits" };
 const ORDER_CHOICES = ["Cupcakes", "Cookies & biscuits", "Dog shaped biscuits", "Birthday or party cake", "Just a question or feedback"];
 
 /* ========================================================= */
@@ -623,7 +624,8 @@ document.querySelectorAll(".pop").forEach(b => b.addEventListener("click", e => 
 
   [...ORDER_CHOICES, "Something else"].forEach((c, i) => {
     const l = document.createElement("label"); l.className = "chip";
-    l.innerHTML = `<input type="checkbox" name="what" value="${c === "Something else" ? "__other_option__" : c}"><span>${c}</span>`;
+    const label = CHOICE_LABELS[c] || c;
+    l.innerHTML = `<input type="checkbox" name="what" value="${c === "Something else" ? "__other_option__" : c}"><span>${label}</span>`;
     chips.appendChild(l);
   });
   chips.addEventListener("change", e => {
