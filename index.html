@@ -144,7 +144,37 @@
   .order{background:var(--orange-soft)}
   .order-intro{text-align:center;max-width:560px;margin:0 auto 26px}
   .order-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;max-width:720px;margin:0 auto}
-  .order-card iframe{width:100%;height:1750px;border:0;border-radius:18px}
+  .order-card{padding:30px 30px 26px}
+  .sform{display:grid;gap:18px}
+  .sform .row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width:600px){.order-card{padding:22px 18px}.sform .row{grid-template-columns:1fr}}
+  .field label,.field legend{display:block;font-weight:800;color:var(--ink);margin-bottom:6px;font-size:1rem}
+  .field .req{color:var(--pink)}
+  .field .hint{font-weight:600;color:var(--ink-soft);font-size:.85rem}
+  .field input,.field textarea{width:100%;font:600 1rem Nunito,sans-serif;color:var(--ink);background:var(--pink-mist);border:2px solid var(--pink-soft);border-radius:16px;padding:12px 14px;transition:border-color .2s,box-shadow .2s,background .2s}
+  .field textarea{min-height:96px;resize:vertical}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--pink);background:#fff;box-shadow:0 0 0 4px rgba(228,47,117,.15)}
+  .field.invalid input,.field.invalid .chips{border-color:#D7263D;box-shadow:0 0 0 4px rgba(215,38,61,.12)}
+  .field .err{display:none;color:#C21F3A;font-weight:700;font-size:.85rem;margin-top:6px}
+  .field.invalid .err{display:block}
+  fieldset.field{border:0;padding:0;margin:0;min-width:0}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;border:2px solid transparent;border-radius:18px;padding:2px}
+  .chip input{position:absolute;opacity:0;pointer-events:none}
+  .chip span{display:inline-block;cursor:pointer;user-select:none;font-weight:800;font-size:.95rem;padding:9px 15px;border-radius:999px;background:#fff;color:var(--pink-dark);box-shadow:0 0 0 2px var(--pink-soft) inset;transition:transform .2s cubic-bezier(.3,1.8,.5,1),background .2s,color .2s}
+  .chip span:hover{transform:translateY(-2px) rotate(-2deg)}
+  .chip input:checked + span{background:var(--pink);color:#fff;box-shadow:0 4px 0 var(--pink-dark)}
+  .chip input:focus-visible + span{outline:3px solid var(--orange);outline-offset:2px}
+  .other-wrap{display:none;margin-top:10px}
+  .other-wrap.show{display:block}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .form-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}
+  .form-foot small{color:var(--ink-soft);font-weight:600;max-width:360px}
+  .sform .btn{margin:0}
+  .sform .btn[disabled]{opacity:.7;cursor:wait;transform:none}
+  .form-msg{display:none;text-align:center;padding:26px 10px}
+  .form-msg.show{display:block}
+  .form-msg .big{font-size:3.2rem;display:inline-block;animation:whisk 1.6s ease-in-out infinite}
+  .form-msg.error h3{color:#C21F3A}
   .coming{text-align:center;padding:30px 18px}
   .coming .whisk{font-size:3rem;display:inline-block;animation:whisk 1.6s ease-in-out infinite}
   @keyframes whisk{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
@@ -262,7 +292,73 @@
       <span class="kicker">Birthdays, parties &amp; treats</span>
       <h2>Order something special</h2>
       <p class="order-intro">Have a question, some feedback, or a cake idea for a special day? Don't hesitate to reach out. Tell us what you're dreaming of and we'll get back to you.</p>
-      <div class="order-card" id="orderCard"></div>
+      <div class="order-card" id="orderCard">
+        <form class="sform" id="orderForm" novalidate>
+          <div class="row">
+            <div class="field" data-name="name">
+              <label for="f-name">Your name <span class="req">*</span></label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required>
+              <p class="err">Please tell us your name.</p>
+            </div>
+            <div class="field" data-name="phone">
+              <label for="f-phone">Phone number <span class="req">*</span></label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+              <p class="err">Please add a phone number so we can call you back.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field" data-name="email">
+              <label for="f-email">Email address</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email">
+              <p class="err">That email doesn't look quite right.</p>
+            </div>
+            <div class="field" data-name="date">
+              <label for="f-date">Date you need it</label>
+              <input id="f-date" name="date" type="date">
+              <p class="err">Please pick a date from today onwards.</p>
+            </div>
+          </div>
+          <fieldset class="field" data-name="what">
+            <legend>What would you like? <span class="req">*</span> <span class="hint">Pick as many as you like</span></legend>
+            <div class="chips" id="whatChips"></div>
+            <div class="other-wrap" id="otherWrap">
+              <input id="f-other" name="other" type="text" placeholder="Tell us what else you'd love" aria-label="Something else">
+            </div>
+            <p class="err">Please pick at least one.</p>
+          </fieldset>
+          <div class="row">
+            <div class="field" data-name="people">
+              <label for="f-people">How many people is it for?</label>
+              <input id="f-people" name="people" type="text" inputmode="numeric">
+            </div>
+            <div></div>
+          </div>
+          <div class="field">
+            <label for="f-ideas">Any preferred flavours, theme, colours, or ideas?</label>
+            <textarea id="f-ideas" name="ideas"></textarea>
+          </div>
+          <div class="field">
+            <label for="f-else">Anything else I should know? <span class="hint">Allergies, pick-up questions, feedback</span></label>
+            <textarea id="f-else" name="else"></textarea>
+          </div>
+          <div class="hp" aria-hidden="true"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <div class="form-foot">
+            <small>We'll only use your details to reply to your enquiry.</small>
+            <button class="btn btn-pink" type="submit" id="sendBtn">Send my enquiry</button>
+          </div>
+        </form>
+        <div class="form-msg" id="formThanks" role="status" aria-live="polite">
+          <span class="big" aria-hidden="true">🧁</span>
+          <h3>Thank you! Your enquiry is on its way.</h3>
+          <p>Maddy will be in touch soon. In the meantime, come and say hi at the stall!</p>
+          <button class="btn btn-ghost" type="button" id="againBtn">Send another enquiry</button>
+        </div>
+        <div class="form-msg error" id="formError" role="alert">
+          <h3>Oh crumbs, that didn't send.</h3>
+          <p>It looks like you're offline. Check your connection and try again. Your answers are still there.</p>
+          <button class="btn btn-pink" type="button" id="retryBtn">Try again</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -313,8 +409,20 @@ const GALLERY = [
 // Show a "more coming soon" tile at the end of the gallery? (true / false)
 const MORE_COMING = false;
 
-// Paste the Google Form "embed" link here once it's set up (the src="..." part).
-const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdkf-PEpG4AUY7u-VoOVSbOv0J5EZQQGETuifnP8g5HqqqJPQ/viewform?embedded=true";
+// Enquiries are sent into this Google Form (responses + email alerts live there).
+const GOOGLE_FORM_ID = "1FAIpQLSdkf-PEpG4AUY7u-VoOVSbOv0J5EZQQGETuifnP8g5HqqqJPQ";
+const GOOGLE_FORM_FIELDS = {
+  name:   "entry.1311490817",
+  phone:  "entry.269975351",
+  email:  "entry.1009027513",
+  date:   "entry.2054555781",
+  what:   "entry.1177412377",
+  people: "entry.1719787314",
+  ideas:  "entry.1632157139",
+  else:   "entry.1363397469",
+};
+// The choices must match the Google Form options exactly.
+const ORDER_CHOICES = ["Cupcakes", "Cookies & biscuits", "Dog shaped biscuits", "Birthday or party cake", "Just a question or feedback"];
 
 /* ========================================================= */
 
@@ -450,13 +558,76 @@ document.querySelectorAll(".pop").forEach(b => b.addEventListener("click", e => 
 
 // Order form
 (function(){
-  const card = document.getElementById("orderCard");
-  if (ORDER_FORM_URL){
-    card.innerHTML = `<iframe src="${ORDER_FORM_URL}" title="Sprinkle Studios order form" loading="lazy">Loading…</iframe>`;
-  } else {
-    card.innerHTML = `<div class="coming"><span class="whisk" aria-hidden="true">🥄</span><h3>Our order form is being whipped up!</h3><p>It'll be ready very soon. In the meantime, come and say hi at the stall.</p><a class="btn btn-pink pop" href="#markets">See market dates</a></div>`;
-    card.querySelector(".pop").addEventListener("click", e => burst(e.clientX, e.clientY));
+  const form = document.getElementById("orderForm");
+  const chips = document.getElementById("whatChips");
+  const otherWrap = document.getElementById("otherWrap");
+  const thanks = document.getElementById("formThanks");
+  const errBox = document.getElementById("formError");
+  const btn = document.getElementById("sendBtn");
+  const dateEl = document.getElementById("f-date");
+  const pad = n => String(n).padStart(2, "0");
+  const t = new Date(); const todayStr = `${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`;
+  dateEl.min = todayStr;
+
+  [...ORDER_CHOICES, "Something else"].forEach((c, i) => {
+    const l = document.createElement("label"); l.className = "chip";
+    l.innerHTML = `<input type="checkbox" name="what" value="${c === "Something else" ? "__other_option__" : c}"><span>${c}</span>`;
+    chips.appendChild(l);
+  });
+  chips.addEventListener("change", e => {
+    if (e.target.value === "__other_option__"){
+      otherWrap.classList.toggle("show", e.target.checked);
+      if (e.target.checked) document.getElementById("f-other").focus();
+    }
+    form.querySelector('[data-name="what"]').classList.remove("invalid");
+  });
+  form.addEventListener("input", e => { const f = e.target.closest(".field"); if (f) f.classList.remove("invalid"); });
+
+  const val = n => (form.elements[n] && form.elements[n].value || "").trim();
+  function validate(){
+    const bad = [];
+    if (!val("name")) bad.push("name");
+    if (val("phone").replace(/\D/g, "").length < 8) bad.push("phone");
+    if (val("email") && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val("email"))) bad.push("email");
+    if (val("date") && val("date") < todayStr) bad.push("date");
+    if (!form.querySelector('input[name="what"]:checked')) bad.push("what");
+    form.querySelectorAll(".field").forEach(f => f.classList.toggle("invalid", bad.includes(f.dataset.name)));
+    if (bad.length){
+      const first = form.querySelector(`[data-name="${bad[0]}"]`);
+      first.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block: "center"});
+      const inp = first.querySelector("input"); if (inp) inp.focus({preventScroll:true});
+    }
+    return !bad.length;
   }
+
+  function show(el){ [form, thanks, errBox].forEach(x => { x.style.display = x === el ? "" : "none"; }); el.classList && el.classList.add("show"); }
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (val("website")) return;            // bots fill the hidden box
+    if (!validate()) return;
+    if (!navigator.onLine){ show(errBox); return; }
+    const F = GOOGLE_FORM_FIELDS, data = new URLSearchParams();
+    ["name","phone","email","people","ideas","else"].forEach(k => { if (val(k)) data.append(F[k], val(k)); });
+    if (val("date")){ const [y,m,d] = val("date").split("-"); data.append(F.date+"_year", y); data.append(F.date+"_month", m); data.append(F.date+"_day", d); }
+    form.querySelectorAll('input[name="what"]:checked').forEach(c => data.append(F.what, c.value));
+    if (form.querySelector('input[value="__other_option__"]:checked')) data.append(F.what+".other_option_response", val("other") || "Something else");
+    btn.disabled = true; btn.textContent = "Sending...";
+    try {
+      await fetch(`https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`, { method:"POST", mode:"no-cors", body:data });
+      show(thanks);
+      const r = thanks.getBoundingClientRect(); burst(r.left + r.width/2, r.top + 40);
+      thanks.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block: "center"});
+      form.reset(); otherWrap.classList.remove("show");
+    } catch(err){
+      show(errBox);
+    } finally {
+      btn.disabled = false; btn.textContent = "Send my enquiry";
+    }
+  });
+  document.getElementById("againBtn").addEventListener("click", () => show(form));
+  document.getElementById("retryBtn").addEventListener("click", () => { show(form); form.requestSubmit(); });
+  [thanks, errBox].forEach(x => x.style.display = "none");
 })();
 
 document.getElementById("year").textContent = new Date().getFullYear();
