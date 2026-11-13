@@ -111,6 +111,21 @@
   .portrait svg{width:62%}
   @media (max-width:760px){.about-grid{grid-template-columns:1fr}.speech::after{left:50%;top:-18px;transform:translateX(-50%);border:12px solid transparent;border-bottom:18px solid #fff;border-top:0}}
 
+  /* Treats */
+  .treats{background:#fff}
+  .treats-intro{text-align:center;max-width:520px;margin:0 auto 30px}
+  .treat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .treat{background:var(--cream);border-radius:var(--radius);padding:22px 18px 20px;text-align:center;box-shadow:0 0 0 2px var(--pink-soft) inset;display:flex;flex-direction:column;align-items:center;transition:transform .3s cubic-bezier(.3,1.6,.5,1),box-shadow .3s}
+  .treat:nth-child(odd):hover{transform:translateY(-6px) rotate(-1.5deg);box-shadow:var(--shadow)}
+  .treat:nth-child(even):hover{transform:translateY(-6px) rotate(1.5deg);box-shadow:var(--shadow)}
+  .treat img{width:150px;height:150px;border-radius:50%;object-fit:cover;border:6px solid #fff;box-shadow:0 8px 20px -10px rgba(184,30,90,.5);margin-bottom:14px}
+  .treat h3{font-size:1.45rem;margin-bottom:.3em}
+  .treat p{margin:0 0 16px;color:var(--ink-soft);font-weight:600;font-size:.98rem;flex:1}
+  .treat .btn{padding:9px 18px;font-size:.92rem;margin:0}
+  .treat .tag{display:inline-block;background:var(--pink);color:#fff;font-weight:800;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin:-6px 0 8px}
+  @media (max-width:900px){.treat-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:480px){.treat-grid{gap:12px}.treat{padding:16px 10px}.treat img{width:110px;height:110px}.treat h3{font-size:1.2rem}.treat p{font-size:.88rem}.treat .lg{display:none}}
+
   /* Gallery */
   .gallery{background:var(--cream)}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:28px}
@@ -275,8 +290,45 @@
     </div>
   </section>
 
+  <!-- TREATS -->
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--pink-soft)"><path d="M0,30 C240,70 480,-10 720,30 C960,70 1200,-10 1440,30 L1440,60 L0,60 Z" fill="#FFFFFF"/></svg>
+  <section class="treats" id="treats">
+    <div class="wrap">
+      <span class="kicker">What I bake</span>
+      <h2>Sweet treats</h2>
+      <p class="treats-intro">Everything is baked by me, with lots of love (and lots of sprinkles).</p>
+      <div class="treat-grid">
+        <article class="treat reveal">
+          <img src="images/pink-cookie-layer-cake.jpg" alt="A chocolate layer cake topped with pink cream and biscuits" loading="lazy">
+          <h3>Cakes</h3>
+          <p>Layer cakes, party cakes and themed creations, decorated just for your celebration.</p>
+          <a class="btn btn-pink pop" href="#order" data-choice="Birthday or party cake">Order<span class="lg"> a cake</span></a>
+        </article>
+        <article class="treat reveal">
+          <img src="images/jam-heart-biscuits.jpg" alt="Round biscuits with jam heart centres" loading="lazy">
+          <h3>Cookies</h3>
+          <p>Jam hearts, reindeer and flower biscuits that are almost too cute to eat.</p>
+          <a class="btn btn-pink pop" href="#order" data-choice="Cookies &amp; biscuits">Order<span class="lg"> cookies</span></a>
+        </article>
+        <article class="treat reveal">
+          <img src="images/rainbow-cupcakes.jpg" alt="Trays of rainbow and Easter cupcakes" loading="lazy">
+          <h3>Cupcakes</h3>
+          <p>Fluffy cupcakes piled high with swirly icing and fun toppers.</p>
+          <a class="btn btn-pink pop" href="#order" data-choice="Cupcakes">Order<span class="lg"> cupcakes</span></a>
+        </article>
+        <article class="treat reveal">
+          <img src="images/dog-biscuits.jpg" alt="Biscuits shaped like puppy faces" loading="lazy">
+          <span class="tag">Signature</span>
+          <h3>Dog biscuits</h3>
+          <p>My signature treat! Cheeky puppy-face biscuits that always make people smile.</p>
+          <a class="btn btn-pink pop" href="#order" data-choice="Dog shaped biscuits">Order<span class="lg"> dog biscuits</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- GALLERY -->
-  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--pink-soft)"><path d="M0,30 C240,70 480,-10 720,30 C960,70 1200,-10 1440,30 L1440,60 L0,60 Z" fill="#FFF9F4"/></svg>
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:#fff"><path d="M0,30 C240,-10 480,70 720,30 C960,-10 1200,70 1440,30 L1440,60 L0,60 Z" fill="#FFF9F4"/></svg>
   <section class="gallery" id="gallery">
     <div class="wrap">
       <span class="kicker">Fresh out of the oven</span>
@@ -628,6 +680,13 @@ document.querySelectorAll(".pop").forEach(b => b.addEventListener("click", e => 
   document.getElementById("againBtn").addEventListener("click", () => show(form));
   document.getElementById("retryBtn").addEventListener("click", () => { show(form); form.requestSubmit(); });
   [thanks, errBox].forEach(x => x.style.display = "none");
+
+  // "Order ..." buttons on the treat cards pre-tick the matching choice
+  document.querySelectorAll("[data-choice]").forEach(a => a.addEventListener("click", () => {
+    show(form);
+    const box = [...form.querySelectorAll('input[name="what"]')].find(c => c.value === a.dataset.choice);
+    if (box){ box.checked = true; form.querySelector('[data-name="what"]').classList.remove("invalid"); }
+  }));
 })();
 
 document.getElementById("year").textContent = new Date().getFullYear();
