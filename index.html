@@ -52,8 +52,14 @@
   /* Hero */
   .hero{padding:64px 0 96px;text-align:center;background:radial-gradient(circle at 50% 40%,#fff 0,var(--pink-mist) 60%,var(--pink-soft) 100%);overflow:hidden}
   .sprinkle-field{position:absolute;inset:0;pointer-events:none}
-  .sprinkle{position:absolute;width:6px;height:20px;border-radius:6px;opacity:.9;animation:drift 7s ease-in-out infinite alternate}
-  @keyframes drift{from{transform:translateY(0) rotate(var(--r))}to{transform:translateY(-14px) rotate(calc(var(--r) + 25deg))}}
+  .sprinkle{position:absolute;top:-30px;width:6px;height:20px;border-radius:6px;opacity:.9;will-change:transform;animation:fall 9s linear infinite}
+  @keyframes fall{
+    0%{transform:translate(0,0) rotate(var(--r))}
+    25%{transform:translate(var(--sway),calc(var(--fall) * .25)) rotate(calc(var(--r) + 90deg))}
+    50%{transform:translate(0,calc(var(--fall) * .5)) rotate(calc(var(--r) + 180deg))}
+    75%{transform:translate(calc(var(--sway) * -1),calc(var(--fall) * .75)) rotate(calc(var(--r) + 270deg))}
+    100%{transform:translate(0,var(--fall)) rotate(calc(var(--r) + 360deg))}
+  }
   .hero-card{position:relative;z-index:1;max-width:720px;margin:0 auto;background:#fff;border-radius:50%/42%;padding:58px 40px 50px;box-shadow:var(--shadow)}
   .hero-logo{width:min(470px,86%);margin:0 auto 14px;cursor:pointer;transition:transform .3s}
   .hero-logo:hover{transform:scale(1.04) rotate(-2deg)}
@@ -322,14 +328,18 @@ const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const s = document.createElement("i");
     s.className = "sprinkle";
     s.style.left = rand(0,100)+"%";
-    s.style.top = rand(0,100)+"%";
+    if (reduceMotion) s.style.top = rand(0,100)+"%";
+    s.style.setProperty("--sway", rand(-18,18)+"px");
     s.style.background = COLOURS[i % COLOURS.length];
     s.style.setProperty("--r", rand(0,360)+"deg");
-    s.style.animationDelay = rand(-7,0)+"s";
-    s.style.animationDuration = rand(5,9)+"s";
+    const dur = rand(7,14);
+    s.style.animationDuration = dur+"s";
+    s.style.animationDelay = (-rand(0,dur))+"s";
     if (COLOURS[i % COLOURS.length] === "#FFFFFF") s.style.boxShadow = "0 0 0 1px #F7C3D7";
     field.appendChild(s);
   }
+  const setFall = () => field.style.setProperty("--fall", (field.offsetHeight + 60) + "px");
+  setFall(); addEventListener("resize", setFall);
 })();
 
 // Confetti burst
