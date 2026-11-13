@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sprinkle Studios | Sweet treats in Newington</title>
+<meta name="description" content="Sprinkle Studios bakes cupcakes, cookies and cakes that make you grin. Find our market stall in Newington, NSW, or ask about a custom order.">
+<meta property="og:title" content="Sprinkle Studios">
+<meta property="og:description" content="Sweet treats that make you grin. Cupcakes, cookies and everything in between!">
+<meta property="og:image" content="logo.png">
+<meta name="theme-color" content="#E42F75">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,100,1&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#E42F75; --pink-dark:#B81E5A; --pink-soft:#FDE3EE; --pink-mist:#FFF1F6;
+    --orange:#F3A647; --orange-soft:#FFEBD1;
+    --cream:#FFF9F4; --ink:#4A2236; --ink-soft:#7A5468; --white:#fff;
+    --radius:28px;
+    --shadow:0 10px 30px -12px rgba(184,30,90,.35);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--cream);color:var(--ink);font:500 1.08rem/1.65 Nunito,system-ui,sans-serif;overflow-x:hidden}
+  img{max-width:100%;display:block}
+  a{color:var(--pink-dark)}
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 100,"WONK" 1;font-weight:900;color:var(--pink);line-height:1.1;margin:0 0 .5em}
+  h2{font-size:clamp(2.1rem,6vw,3.2rem);text-align:center}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+  section{position:relative;padding:72px 0}
+  .kicker{display:block;text-align:center;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;color:var(--orange);margin-bottom:.4em}
+
+  /* Nav */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,249,244,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:2px dashed var(--pink-soft)}
+  nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 22px;max-width:1060px;margin:0 auto}
+  nav .brand img{height:42px;width:auto}
+  nav ul{display:flex;gap:6px;list-style:none;margin:0;padding:0;flex-wrap:wrap;justify-content:flex-end}
+  nav a{display:inline-block;text-decoration:none;font-weight:800;color:var(--ink);padding:7px 13px;border-radius:999px;transition:background .2s,color .2s,transform .2s}
+  nav a:hover{background:var(--pink-soft);color:var(--pink-dark);transform:translateY(-2px) rotate(-2deg)}
+  nav a.cta{background:var(--pink);color:#fff}
+  nav a.cta:hover{background:var(--pink-dark);color:#fff}
+  @media (max-width:640px){
+    nav{flex-direction:column;padding:8px 12px}
+    nav .brand img{height:36px}
+    nav a{padding:5px 10px;font-size:.92rem}
+  }
+
+  /* Hero */
+  .hero{padding:64px 0 96px;text-align:center;background:radial-gradient(circle at 50% 40%,#fff 0,var(--pink-mist) 60%,var(--pink-soft) 100%);overflow:hidden}
+  .sprinkle-field{position:absolute;inset:0;pointer-events:none}
+  .sprinkle{position:absolute;width:6px;height:20px;border-radius:6px;opacity:.9;animation:drift 7s ease-in-out infinite alternate}
+  @keyframes drift{from{transform:translateY(0) rotate(var(--r))}to{transform:translateY(-14px) rotate(calc(var(--r) + 25deg))}}
+  .hero-card{position:relative;z-index:1;max-width:720px;margin:0 auto;background:#fff;border-radius:50%/42%;padding:58px 40px 50px;box-shadow:var(--shadow)}
+  .hero-logo{width:min(470px,86%);margin:0 auto 14px;cursor:pointer;transition:transform .3s}
+  .hero-logo:hover{transform:scale(1.04) rotate(-2deg)}
+  .hero h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .tagline{font-size:clamp(1.05rem,2.6vw,1.3rem);max-width:470px;margin:0 auto 26px;color:var(--ink-soft);font-weight:700}
+  @media (max-width:560px){.hero-card{border-radius:var(--radius);padding:36px 20px 30px}}
+
+  .btn{display:inline-flex;align-items:center;gap:.5em;font:800 1.05rem Nunito,sans-serif;text-decoration:none;border:0;cursor:pointer;padding:14px 26px;border-radius:999px;margin:5px;transition:transform .2s cubic-bezier(.3,1.8,.5,1),box-shadow .2s}
+  .btn:hover{transform:translateY(-3px) scale(1.04)}
+  .btn:active{transform:scale(.96)}
+  .btn-pink{background:var(--pink);color:#fff;box-shadow:0 6px 0 var(--pink-dark)}
+  .btn-orange{background:var(--orange);color:var(--ink);box-shadow:0 6px 0 #C97F22}
+  .btn-ghost{background:#fff;color:var(--pink-dark);box-shadow:0 0 0 3px var(--pink) inset}
+
+  /* Wavy dividers */
+  .wave{display:block;width:100%;height:60px;margin-bottom:-1px}
+
+  /* Markets */
+  .markets{background:var(--cream)}
+  .market-list{display:grid;gap:24px;max-width:640px;margin:28px auto 0}
+  .ticket{display:grid;grid-template-columns:130px 1fr;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .3s}
+  .ticket:hover{transform:rotate(-1deg) scale(1.01)}
+  .ticket .date{background:var(--pink);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 8px;text-align:center;position:relative}
+  .ticket .date::after{content:"";position:absolute;right:-8px;top:0;bottom:0;width:16px;background:radial-gradient(circle at 8px 12px,#fff 6px,transparent 6.5px) 0 0/16px 24px repeat-y}
+  .ticket .dow{font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;opacity:.9}
+  .ticket .day{font-family:Fraunces,serif;font-weight:900;font-size:3.2rem;line-height:1}
+  .ticket .mon{font-weight:800;text-transform:uppercase;letter-spacing:.1em}
+  .ticket .info{padding:20px 22px 20px 28px}
+  .ticket h3{font-size:1.55rem;margin-bottom:.15em}
+  .ticket .meta{margin:0 0 12px;color:var(--ink-soft);font-weight:700}
+  .badge{display:inline-block;background:var(--orange-soft);color:#9A5A0B;font-weight:800;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin-bottom:8px}
+  .ticket .actions{display:flex;flex-wrap:wrap;gap:8px}
+  .ticket .actions .btn{padding:9px 16px;font-size:.92rem;margin:0}
+  .no-markets{text-align:center;background:#fff;border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
+  @media (max-width:480px){.ticket{grid-template-columns:96px 1fr}.ticket .day{font-size:2.5rem}.ticket .info{padding:16px 14px 16px 22px}}
+
+  /* About */
+  .about{background:var(--pink-soft)}
+  .about-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:44px;align-items:center;margin-top:24px}
+  .speech{position:relative;background:#fff;border-radius:var(--radius);padding:30px 30px 26px;box-shadow:var(--shadow);font-size:1.15rem}
+  .speech::after{content:"";position:absolute;left:-18px;top:48px;border:12px solid transparent;border-right:18px solid #fff;border-left:0}
+  .speech p{margin:0 0 .8em}
+  .speech .sign{font-family:Fraunces,serif;font-weight:900;color:var(--pink);font-size:1.6rem;margin:0;transform:rotate(-4deg);display:inline-block}
+  .faves{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 16px;padding:0;list-style:none}
+  .faves li{background:var(--orange-soft);color:#7A4708;font-weight:800;padding:5px 13px;border-radius:999px;font-size:.95rem;transition:transform .2s}
+  .faves li:hover{transform:rotate(-4deg) scale(1.08)}
+  .portrait{aspect-ratio:1;border-radius:50%;background:#fff;box-shadow:var(--shadow);display:grid;place-items:center;overflow:hidden;border:8px solid #fff;max-width:340px;margin:0 auto;width:100%}
+  .portrait img{width:100%;height:100%;object-fit:cover}
+  .portrait svg{width:62%}
+  @media (max-width:760px){.about-grid{grid-template-columns:1fr}.speech::after{left:50%;top:-18px;transform:translateX(-50%);border:12px solid transparent;border-bottom:18px solid #fff;border-top:0}}
+
+  /* Gallery */
+  .gallery{background:var(--cream)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:28px}
+  @media (max-width:560px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}.tile.placeholder span{font-size:1.05rem}}
+  .tile{position:relative;aspect-ratio:1;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);background:#fff;margin:0;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+  .tile:nth-child(odd):hover{transform:rotate(-2deg) scale(1.03)}
+  .tile:nth-child(even):hover{transform:rotate(2deg) scale(1.03)}
+  .tile img{width:100%;height:100%;object-fit:cover}
+  .tile figcaption{position:absolute;left:10px;bottom:10px;background:#fff;color:var(--pink-dark);font-weight:800;font-size:.9rem;padding:4px 12px;border-radius:999px}
+  .tile.placeholder{display:grid;place-items:center;text-align:center;background-color:var(--pink-mist);background-image:radial-gradient(var(--pink-soft) 2px,transparent 2.5px);background-size:18px 18px}
+  .tile.placeholder span{font-family:Fraunces,serif;font-weight:900;color:var(--pink);font-size:1.35rem;padding:0 14px}
+  .tile.placeholder small{display:block;font-family:Nunito,sans-serif;font-weight:700;color:var(--ink-soft);font-size:.8rem;margin-top:4px}
+
+  /* Order */
+  .order{background:var(--orange-soft)}
+  .order-intro{text-align:center;max-width:560px;margin:0 auto 26px}
+  .order-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;max-width:720px;margin:0 auto}
+  .order-card iframe{width:100%;min-height:1100px;border:0;border-radius:18px}
+  .coming{text-align:center;padding:30px 18px}
+  .coming .whisk{font-size:3rem;display:inline-block;animation:whisk 1.6s ease-in-out infinite}
+  @keyframes whisk{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+
+  /* Thanks + footer */
+  .thanks{background:var(--pink);color:#fff;text-align:center;padding:64px 0 40px}
+  .thanks h2{color:#fff}
+  .thanks p{max-width:560px;margin:0 auto 1em;font-size:1.15rem;font-weight:700}
+  footer{background:var(--pink);color:#FFD6E6;text-align:center;padding:10px 20px 36px;font-size:.9rem}
+  footer a{color:#fff}
+
+  /* Confetti */
+  .confetti{position:fixed;width:6px;height:16px;border-radius:5px;pointer-events:none;z-index:999}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s cubic-bezier(.3,1.4,.5,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav aria-label="Main">
+    <a class="brand" href="#top" aria-label="Sprinkle Studios home"><img src="logo.png" alt="Sprinkle Studios"></a>
+    <ul>
+      <li><a href="#markets">Find us</a></li>
+      <li><a href="#about">Meet Maddy</a></li>
+      <li><a href="#gallery">Bakes</a></li>
+      <li><a href="#order" class="cta">Order</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="sprinkle-field" id="sprinkles" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-card reveal">
+        <h1>Sprinkle Studios</h1>
+        <img class="hero-logo" src="logo.png" alt="Sprinkle Studios logo with a cupcake" id="heroLogo">
+        <p class="tagline">We're all about baking sweet treats that make you grin, from cupcakes to cookies and everything in between!</p>
+        <a class="btn btn-pink pop" href="#markets">Find our stall</a>
+        <a class="btn btn-orange pop" href="#order">Order a special cake</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETS -->
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--pink-soft)"><path d="M0,30 C240,70 480,-10 720,30 C960,70 1200,-10 1440,30 L1440,60 L0,60 Z" fill="#FFF9F4"/></svg>
+  <section class="markets" id="markets">
+    <div class="wrap">
+      <span class="kicker">Come say hi</span>
+      <h2>Upcoming markets</h2>
+      <p style="text-align:center;max-width:520px;margin:0 auto">Fresh bakes, big smiles. We take cash and card. Get in early before the cupcakes run out!</p>
+      <div class="market-list" id="marketList"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)"><path d="M0,30 C240,-10 480,70 720,30 C960,-10 1200,70 1440,30 L1440,60 L0,60 Z" fill="#FDE3EE"/></svg>
+  <section class="about" id="about">
+    <div class="wrap">
+      <span class="kicker">The baker</span>
+      <h2>Meet Maddy</h2>
+      <div class="about-grid">
+        <div class="portrait reveal" id="portrait">
+          <!-- Swap this drawing for a photo: <img src="images/maddy.jpg" alt="Maddy with her baking"> -->
+          <svg viewBox="0 0 120 130" aria-hidden="true">
+            <path d="M22 62 Q60 8 98 62 Q108 64 104 74 L16 74 Q12 64 22 62Z" fill="#fff" stroke="#E42F75" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M40 46 Q60 28 82 48" fill="none" stroke="#E42F75" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="66" cy="22" r="9" fill="#E42F75"/>
+            <path d="M66 13 q4 -8 10 -9" stroke="#B81E5A" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M18 76 L102 76 L92 122 L28 122 Z" fill="#F3A647" stroke="#C97F22" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M38 78 L42 120 M52 78 L54 120 M68 78 L66 120 M82 78 L78 120" stroke="#C97F22" stroke-width="3"/>
+            <rect x="30" y="56" width="4" height="10" rx="2" fill="#F3A647" transform="rotate(-30 32 61)"/>
+            <rect x="84" y="54" width="4" height="10" rx="2" fill="#E42F75" transform="rotate(35 86 59)"/>
+            <rect x="56" y="58" width="4" height="10" rx="2" fill="#F3A647" transform="rotate(70 58 63)"/>
+          </svg>
+        </div>
+        <div class="speech reveal">
+          <p>Welcome to Sprinkle Studios! I'm Maddy, a 10-year-old baker behind Sprinkle Studios.</p>
+          <p>I've basically been baking since I could reach the counter, and I absolutely love making all sorts of goodies, like:</p>
+          <ul class="faves">
+            <li>dog shaped biscuits</li>
+            <li>carrot cakes</li>
+            <li>chocolate cakes</li>
+            <li>lemon cheesecakes</li>
+          </ul>
+          <p>Making people smile with my treats is my favourite thing to do!</p>
+          <p class="sign">Maddy x</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--pink-soft)"><path d="M0,30 C240,70 480,-10 720,30 C960,70 1200,-10 1440,30 L1440,60 L0,60 Z" fill="#FFF9F4"/></svg>
+  <section class="gallery" id="gallery">
+    <div class="wrap">
+      <span class="kicker">Fresh out of the oven</span>
+      <h2>Cakes &amp; bakes</h2>
+      <div class="grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- ORDER -->
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)"><path d="M0,30 C240,-10 480,70 720,30 C960,-10 1200,70 1440,30 L1440,60 L0,60 Z" fill="#FFEBD1"/></svg>
+  <section class="order" id="order">
+    <div class="wrap">
+      <span class="kicker">Birthdays, parties &amp; treats</span>
+      <h2>Order something special</h2>
+      <p class="order-intro">Have a question, some feedback, or a cake idea for a special day? Don't hesitate to reach out. Tell us what you're dreaming of and we'll get back to you.</p>
+      <div class="order-card" id="orderCard"></div>
+    </div>
+  </section>
+
+  <!-- THANKS -->
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--orange-soft)"><path d="M0,30 C240,70 480,-10 720,30 C960,70 1200,-10 1440,30 L1440,60 L0,60 Z" fill="#E42F75"/></svg>
+  <section class="thanks">
+    <div class="wrap">
+      <h2>Thank you, people of Earth!</h2>
+      <p>Thanks for visiting! We hope you're leaving inspired to treat yourself.</p>
+      <p>If you're craving more, don't hesitate to reach out. I would love to sweeten your day even more!</p>
+      <a class="btn btn-ghost pop" href="#top">Back to the top</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; <span id="year">2026</span> Sprinkle Studios &middot; Baked with love in Newington, NSW</p>
+</footer>
+
+<script>
+/* =========================================================
+   EASY EDITS: change the bits below, nothing else needed.
+   ========================================================= */
+
+// Market stalls. Past dates hide automatically. Times are 24-hour.
+const MARKETS = [
+  { date: "2026-11-21", start: "09:00", end: "14:00", name: "Newington Marketplace", suburb: "Newington", note: "Our very first stall!" },
+];
+
+// Gallery photos. Upload pictures to the "images" folder, then list them here.
+// Example: { src: "images/carrot-cake.jpg", caption: "Carrot cake" },
+const GALLERY = [];
+
+// Paste the Google Form "embed" link here once it's set up (the src="..." part).
+const ORDER_FORM_URL = "";
+
+/* ========================================================= */
+
+const COLOURS = ["#E42F75","#F3A647","#FFFFFF","#B81E5A","#FFC9DD"];
+const rand = (a,b) => a + Math.random()*(b-a);
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Hero sprinkles
+(function(){
+  const field = document.getElementById("sprinkles");
+  const n = innerWidth < 600 ? 34 : 70;
+  for (let i=0;i<n;i++){
+    const s = document.createElement("i");
+    s.className = "sprinkle";
+    s.style.left = rand(0,100)+"%";
+    s.style.top = rand(0,100)+"%";
+    s.style.background = COLOURS[i % COLOURS.length];
+    s.style.setProperty("--r", rand(0,360)+"deg");
+    s.style.animationDelay = rand(-7,0)+"s";
+    s.style.animationDuration = rand(5,9)+"s";
+    if (COLOURS[i % COLOURS.length] === "#FFFFFF") s.style.boxShadow = "0 0 0 1px #F7C3D7";
+    field.appendChild(s);
+  }
+})();
+
+// Confetti burst
+function burst(x, y){
+  if (reduceMotion) return;
+  for (let i=0;i<26;i++){
+    const c = document.createElement("i");
+    c.className = "confetti";
+    c.style.background = COLOURS[i % COLOURS.length];
+    if (COLOURS[i % COLOURS.length] === "#FFFFFF") c.style.boxShadow = "0 0 0 1px #F7C3D7";
+    c.style.left = x+"px"; c.style.top = y+"px";
+    document.body.appendChild(c);
+    const ang = rand(0, Math.PI*2), dist = rand(60,170);
+    c.animate([
+      { transform:`translate(-50%,-50%) rotate(0deg)`, opacity:1 },
+      { transform:`translate(${Math.cos(ang)*dist}px, ${Math.sin(ang)*dist + 120}px) rotate(${rand(-540,540)}deg)`, opacity:0 }
+    ], { duration: rand(800,1300), easing:"cubic-bezier(.2,.7,.4,1)" }).onfinish = () => c.remove();
+  }
+}
+document.getElementById("heroLogo").addEventListener("click", e => burst(e.clientX, e.clientY));
+document.querySelectorAll(".pop").forEach(b => b.addEventListener("click", e => {
+  const r = b.getBoundingClientRect(); burst(r.left + r.width/2, r.top + r.height/2);
+}));
+
+// Markets
+(function(){
+  const list = document.getElementById("marketList");
+  const today = new Date(); today.setHours(0,0,0,0);
+  const upcoming = MARKETS
+    .map(m => ({...m, d: new Date(m.date + "T00:00:00")}))
+    .filter(m => m.d >= today)
+    .sort((a,b) => a.d - b.d);
+  const fmtTime = t => { let [h,m] = t.split(":").map(Number); const ap = h>=12?"pm":"am"; h = h%12||12; return h + (m?":"+String(m).padStart(2,"0"):"") + ap; };
+  if (!upcoming.length){
+    list.innerHTML = `<div class="no-markets reveal"><h3>New dates coming soon!</h3><p>We're busy baking. Check back soon for our next market.</p></div>`;
+    return;
+  }
+  upcoming.forEach((m, i) => {
+    const dow = m.d.toLocaleDateString("en-AU",{weekday:"short"});
+    const mon = m.d.toLocaleDateString("en-AU",{month:"short"});
+    const map = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(m.name + " " + m.suburb + " NSW");
+    const el = document.createElement("article");
+    el.className = "ticket reveal";
+    el.innerHTML = `
+      <div class="date"><span class="dow">${dow}</span><span class="day">${m.d.getDate()}</span><span class="mon">${mon}</span></div>
+      <div class="info">
+        ${i===0 ? '<span class="badge">Next stall</span>' : ""}
+        <h3>${m.name}</h3>
+        <p class="meta">${fmtTime(m.start)} to ${fmtTime(m.end)} &middot; ${m.suburb}${m.note ? "<br>" + m.note : ""}</p>
+        <div class="actions">
+          <a class="btn btn-pink" href="${map}" target="_blank" rel="noopener">Map</a>
+          <button class="btn btn-ghost" type="button" data-i="${i}">Add to calendar</button>
+        </div>
+      </div>`;
+    list.appendChild(el);
+  });
+  list.addEventListener("click", e => {
+    const b = e.target.closest("button[data-i]"); if (!b) return;
+    const m = upcoming[+b.dataset.i];
+    const stamp = (d,t) => d.replace(/-/g,"") + "T" + t.replace(":","") + "00";
+    const ics = [
+      "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Sprinkle Studios//EN","BEGIN:VEVENT",
+      "UID:" + m.date + "-sprinklestudios",
+      "DTSTAMP:" + new Date().toISOString().replace(/[-:]/g,"").split(".")[0] + "Z",
+      "DTSTART;TZID=Australia/Sydney:" + stamp(m.date,m.start),
+      "DTEND;TZID=Australia/Sydney:" + stamp(m.date,m.end),
+      "SUMMARY:Sprinkle Studios bake stall",
+      "LOCATION:" + m.name + ", " + m.suburb + " NSW",
+      "END:VEVENT","END:VCALENDAR"].join("\r\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([ics], {type:"text/calendar"}));
+    a.download = "sprinkle-studios-" + m.date + ".ics";
+    a.click();
+    burst(e.clientX, e.clientY);
+  });
+})();
+
+// Gallery
+(function(){
+  const grid = document.getElementById("galleryGrid");
+  if (GALLERY.length){
+    GALLERY.forEach(p => {
+      const f = document.createElement("figure");
+      f.className = "tile reveal";
+      f.innerHTML = `<img src="${p.src}" alt="${p.caption || "A Sprinkle Studios bake"}" loading="lazy">${p.caption ? `<figcaption>${p.caption}</figcaption>` : ""}`;
+      grid.appendChild(f);
+    });
+  } else {
+    ["Cupcakes","Cookies","Dog biscuits","Carrot cake","Chocolate cake","Lemon cheesecake"].forEach(name => {
+      const f = document.createElement("figure");
+      f.className = "tile placeholder reveal";
+      f.innerHTML = `<span>${name}<small>Photo coming soon</small></span>`;
+      grid.appendChild(f);
+    });
+  }
+})();
+
+// Order form
+(function(){
+  const card = document.getElementById("orderCard");
+  if (ORDER_FORM_URL){
+    card.innerHTML = `<iframe src="${ORDER_FORM_URL}" title="Sprinkle Studios order form" loading="lazy">Loading…</iframe>`;
+  } else {
+    card.innerHTML = `<div class="coming"><span class="whisk" aria-hidden="true">🥄</span><h3>Our order form is being whipped up!</h3><p>It'll be ready very soon. In the meantime, come and say hi at the stall.</p><a class="btn btn-pink pop" href="#markets">See market dates</a></div>`;
+    card.querySelector(".pop").addEventListener("click", e => burst(e.clientX, e.clientY));
+  }
+})();
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Scroll reveal
+(function(){
+  const els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window) || reduceMotion){ els.forEach(e => e.classList.add("in")); return; }
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+  }), { threshold: .15 });
+  els.forEach(e => io.observe(e));
+})();
+</script>
+</body>
+</html>
