@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Sprinkle Studios Editor</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,100,1&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--pink:#E42F75;--pink-dark:#B81E5A;--pink-soft:#FDE3EE;--pink-mist:#FFF1F6;--orange:#F3A647;--orange-soft:#FFEBD1;--cream:#FFF9F4;--ink:#4A2236;--ink-soft:#7A5468;--ok:#1E8E5A;--bad:#C21F3A}
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{height:100%}
+  body{margin:0;font:500 15px/1.5 Nunito,system-ui,sans-serif;color:var(--ink);background:var(--pink-mist)}
+  h1,h2,h3{font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 100,"WONK" 1;font-weight:900;color:var(--pink);margin:0}
+  button,input,textarea{font:inherit;color:inherit}
+  .btn{display:inline-flex;align-items:center;gap:6px;border:0;cursor:pointer;font-weight:800;padding:9px 16px;border-radius:999px;transition:transform .15s,background .2s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+  .btn-pink{background:var(--pink);color:#fff;box-shadow:0 4px 0 var(--pink-dark)}
+  .btn-ghost{background:#fff;color:var(--pink-dark);box-shadow:0 0 0 2px var(--pink-soft) inset}
+  .btn-small{padding:5px 11px;font-size:.85rem}
+  .btn-link{background:none;border:0;color:var(--pink-dark);font-weight:800;cursor:pointer;padding:0;text-decoration:underline}
+
+  /* Layout */
+  .app{display:grid;grid-template-rows:auto 1fr;height:100vh}
+  .topbar{display:flex;align-items:center;gap:14px;padding:10px 18px;background:#fff;border-bottom:2px dashed var(--pink-soft)}
+  .topbar img{height:36px}
+  .pill{background:var(--pink-soft);color:var(--pink-dark);font-weight:800;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px}
+  .status{margin-left:auto;font-weight:700;color:var(--ink-soft);font-size:.9rem}
+  .status.dirty{color:var(--pink-dark)}
+  .seg{display:inline-flex;background:var(--pink-mist);border-radius:999px;padding:3px}
+  .seg button{border:0;background:none;padding:5px 12px;border-radius:999px;font-weight:800;cursor:pointer;color:var(--ink-soft)}
+  .seg button.on{background:#fff;color:var(--pink-dark);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .main{display:grid;grid-template-columns:340px 1fr;min-height:0}
+  .side{overflow:auto;background:#fff;border-right:2px solid var(--pink-soft);padding:16px 16px 40px}
+  .stage{overflow:hidden;display:flex;justify-content:center;background:repeating-linear-gradient(45deg,var(--pink-mist),var(--pink-mist) 12px,#fff 12px,#fff 24px)}
+  .stage iframe{border:0;width:100%;height:100%;background:#fff;transition:width .3s}
+  .stage.phone iframe{width:390px;border-left:2px solid var(--pink-soft);border-right:2px solid var(--pink-soft)}
+
+  /* Sidebar panels */
+  .panel{background:var(--cream);border-radius:18px;padding:14px;margin-bottom:14px;box-shadow:0 0 0 2px var(--pink-soft) inset}
+  .panel h2{font-size:1.25rem;margin-bottom:6px}
+  .panel p{margin:0 0 8px;color:var(--ink-soft);font-size:.9rem}
+  .tips{margin:0;padding-left:18px;color:var(--ink-soft);font-size:.9rem}
+  .tips li{margin-bottom:4px}
+  .market{background:#fff;border-radius:14px;padding:10px;margin-bottom:10px;box-shadow:0 0 0 2px var(--pink-soft) inset}
+  .market.past{opacity:.6}
+  .market .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .market label{display:block;font-size:.75rem;font-weight:800;color:var(--ink-soft);margin:6px 0 2px}
+  .market input{width:100%;border:2px solid var(--pink-soft);border-radius:10px;padding:6px 8px;background:var(--pink-mist)}
+  .market input:focus{outline:none;border-color:var(--pink);background:#fff}
+  .market .row-end{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+  .market .flag{font-size:.75rem;font-weight:800;color:var(--ink-soft)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .chip{display:inline-flex;align-items:center;gap:4px;background:var(--orange-soft);color:#7A4708;font-weight:800;padding:4px 6px 4px 11px;border-radius:999px;font-size:.88rem}
+  .chip button{border:0;background:rgba(0,0,0,.08);border-radius:50%;width:20px;height:20px;cursor:pointer;line-height:1;font-weight:900;color:#7A4708}
+  .addrow{display:flex;gap:6px}
+  .addrow input{flex:1;border:2px solid var(--pink-soft);border-radius:999px;padding:6px 12px;background:#fff}
+
+  /* Overlays */
+  .screen{position:fixed;inset:0;display:grid;place-items:center;background:var(--pink-mist);z-index:50;padding:20px;overflow:auto}
+  .card{background:#fff;border-radius:26px;box-shadow:0 18px 40px -18px rgba(184,30,90,.4);padding:28px;max-width:560px;width:100%}
+  .card h1{font-size:1.8rem;margin-bottom:6px}
+  .card ol{padding-left:20px;color:var(--ink-soft)}
+  .card ol li{margin-bottom:6px}
+  .card code{background:var(--pink-mist);padding:1px 6px;border-radius:6px;color:var(--pink-dark);font-weight:800}
+  .card input{width:100%;border:2px solid var(--pink-soft);border-radius:14px;padding:10px 12px;background:var(--pink-mist);margin:6px 0 12px}
+  .card input:focus{outline:none;border-color:var(--pink);background:#fff}
+  .err{color:var(--bad);font-weight:800;min-height:1.4em;margin:0 0 8px}
+  .modal{position:fixed;inset:0;background:rgba(74,34,54,.45);display:none;place-items:center;z-index:60;padding:20px}
+  .modal.show{display:grid}
+  .modal .card{max-width:440px}
+  .modal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;margin-bottom:10px}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;font-weight:800;padding:12px 20px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .35s cubic-bezier(.3,1.5,.5,1);z-index:70;max-width:90vw;text-align:center}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .toast.good{background:var(--ok)}
+  .toast.bad{background:var(--bad)}
+  .busy{position:fixed;inset:0;background:rgba(255,241,246,.85);display:none;place-items:center;z-index:65;font-family:Fraunces,serif;font-weight:900;color:var(--pink);font-size:1.6rem;text-align:center}
+  .busy.show{display:grid}
+  .busy span{display:block;font-size:3rem;animation:wob 1s ease-in-out infinite}
+  @keyframes wob{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+  @media (max-width:900px){.main{grid-template-columns:1fr}.side{display:none}}
+</style>
+</head>
+<body>
+
+<!-- Sign-in screen -->
+<div class="screen" id="setup" hidden>
+  <div class="card">
+    <img src="logo.png" alt="Sprinkle Studios" style="height:60px;margin-bottom:10px">
+    <h1>Connect the editor</h1>
+    <p>This is a one-time setup on each computer. A grown-up with the GitHub account needs to do it.</p>
+    <ol>
+      <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub's new token page</a> (signed in as PatryckA).</li>
+      <li>Token name: <code>Sprinkle Studios editor</code>. Expiration: up to 1 year.</li>
+      <li>Repository access: <b>Only select repositories</b> and pick <code>sprinkle-studios</code>.</li>
+      <li>Permissions: <b>Contents</b> set to <b>Read and write</b>. Nothing else.</li>
+      <li>Click <b>Generate token</b>, copy it, and paste it below.</li>
+    </ol>
+    <label for="tokenIn"><b>GitHub token</b></label>
+    <input id="tokenIn" type="password" placeholder="github_pat_..." autocomplete="off">
+    <p class="err" id="setupErr"></p>
+    <button class="btn btn-pink" id="connectBtn">Connect</button>
+    <p style="margin-top:14px;font-size:.85rem;color:var(--ink-soft)">The token is saved only in this browser on this computer. Anyone using this computer's browser could edit the website, so keep it on a computer at home.</p>
+  </div>
+</div>
+
+<div class="app" id="app" hidden>
+  <div class="topbar">
+    <img src="logo.png" alt="Sprinkle Studios">
+    <span class="pill">Editor</span>
+    <div class="seg" role="group" aria-label="Preview size">
+      <button class="on" data-view="laptop">Laptop</button>
+      <button data-view="phone">Phone</button>
+    </div>
+    <span class="status" id="status">Loading...</span>
+    <a class="btn btn-ghost" href="./" target="_blank" rel="noopener">View live site</a>
+    <button class="btn btn-ghost" id="discardBtn" disabled>Undo all</button>
+    <button class="btn btn-pink" id="publishBtn" disabled>Publish</button>
+  </div>
+  <div class="main">
+    <aside class="side">
+      <div class="panel">
+        <h2>How to edit</h2>
+        <ul class="tips">
+          <li><b>Words:</b> click any words on the page and type.</li>
+          <li><b>Photos:</b> click a photo to swap it.</li>
+          <li><b>Gallery:</b> use the buttons on each photo to move or remove it, or the big + tile to add one.</li>
+          <li>Markets and your favourites list are below.</li>
+          <li>Press <b>Publish</b> when you're happy. It's live in about a minute.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>Market dates</h2>
+        <p>Past dates hide on the website by themselves.</p>
+        <div id="marketsEd"></div>
+        <button class="btn btn-ghost btn-small" id="addMarket">+ Add a market</button>
+      </div>
+      <div class="panel">
+        <h2>Things I love baking</h2>
+        <p>These show as little bubbles in Meet Maddy.</p>
+        <div class="chips" id="favesEd"></div>
+        <div class="addrow"><input id="faveIn" placeholder="e.g. brownies" maxlength="40"><button class="btn btn-ghost btn-small" id="addFave">Add</button></div>
+      </div>
+      <div class="panel">
+        <h2>Account</h2>
+        <p id="who">Connected to GitHub.</p>
+        <button class="btn-link" id="signOut">Disconnect this computer</button>
+      </div>
+    </aside>
+    <div class="stage" id="stage">
+      <iframe id="site" title="Website preview (editable)"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- Photo details modal -->
+<div class="modal" id="photoModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+  <div class="card">
+    <h1 id="pmTitle" style="font-size:1.4rem">New photo</h1>
+    <img id="pmPreview" alt="">
+    <label for="pmAlt"><b>What's in this photo?</b> <span style="color:var(--ink-soft)">(helps people who use screen readers)</span></label>
+    <input id="pmAlt" maxlength="120" placeholder="e.g. Rainbow cupcakes with sprinkles">
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn btn-ghost" id="pmCancel">Cancel</button>
+      <button class="btn btn-pink" id="pmOk">Use this photo</button>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="filePick" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+<div class="busy" id="busy"><div><span>🧁</span><b id="busyText">Publishing...</b></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============ Settings ============ */
+const OWNER = "PatryckA", REPO = "sprinkle-studios", BRANCH = "main";
+const TOKEN_KEY = "ss_editor_token";
+const PHOTO_SIZE = 1000;   // photos are cropped square and resized to this (px)
+
+/* ============ Helpers ============ */
+const $ = id => document.getElementById(id);
+let token = null, content = null, siteWin = null, siteDoc = null;
+let dirty = false;
+const uploads = {};        // path -> base64 jpeg (new photos waiting to publish)
+const previews = {};       // path -> data URL (so new photos show before publishing)
+
+function toast(msg, kind){ const t = $("toast"); t.textContent = msg; t.className = "toast show " + (kind||""); clearTimeout(toast._t); toast._t = setTimeout(() => t.className = "toast", 4200); }
+function busy(on, text){ $("busy").classList.toggle("show", on); if (text) $("busyText").textContent = text; }
+function setDirty(v = true){
+  dirty = v;
+  const n = Object.keys(uploads).length;
+  $("status").textContent = v ? "Unsaved changes" + (n ? ` (${n} new photo${n>1?"s":""})` : "") : "Everything is published";
+  $("status").classList.toggle("dirty", v);
+  $("publishBtn").disabled = !v; $("discardBtn").disabled = !v;
+}
+const getPath = (o, p) => p.split(".").reduce((a, k) => a == null ? a : a[k], o);
+function setPath(o, p, v){ const ks = p.split("."); const last = ks.pop(); const t = ks.reduce((a, k) => a[k], o); t[last] = v; }
+const utf8ToB64 = s => btoa(String.fromCharCode(...new TextEncoder().encode(s)));
+function b64Utf8(b64){ const bin = atob(b64.replace(/\n/g, "")); return new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0))); }
+
+/* ============ GitHub ============ */
+async function gh(path, opts = {}){
+  const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}${path}`, {
+    ...opts,
+    headers: { "Authorization": "Bearer " + token, "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", ...(opts.body ? {"Content-Type": "application/json"} : {}) }
+  });
+  if (!res.ok){ const e = new Error("GitHub " + res.status); e.status = res.status; try { e.detail = (await res.json()).message; } catch(_){} throw e; }
+  return res.status === 204 ? null : res.json();
+}
+async function loadLatestContent(){
+  // Read straight from GitHub so we always edit the newest version
+  const f = await gh(`/contents/content.json?ref=${BRANCH}&t=${Date.now()}`);
+  return JSON.parse(b64Utf8(f.content));
+}
+
+/* ============ Sign in ============ */
+async function connect(t){
+  token = t;
+  const repo = await gh("");
+  if (!repo.permissions || !repo.permissions.push) throw Object.assign(new Error("no-push"), {status: 403});
+  return repo;
+}
+$("connectBtn").addEventListener("click", async () => {
+  const t = $("tokenIn").value.trim(); $("setupErr").textContent = "";
+  if (!t){ $("setupErr").textContent = "Paste the token first."; return; }
+  $("connectBtn").disabled = true; $("connectBtn").textContent = "Checking...";
+  try {
+    await connect(t);
+    try { localStorage.setItem(TOKEN_KEY, t); } catch(_){}
+    $("tokenIn").value = "";
+    start();
+  } catch(e){
+    token = null;
+    $("setupErr").textContent = e.status === 401 ? "That token didn't work. Check you copied all of it." :
+      e.status === 403 || e.status === 404 ? "That token can't change sprinkle-studios. Check step 3 and 4." : "Couldn't reach GitHub. Check the internet and try again.";
+  } finally { $("connectBtn").disabled = false; $("connectBtn").textContent = "Connect"; }
+});
+$("signOut").addEventListener("click", () => {
+  if (dirty && !confirm("You have unpublished changes. Disconnect anyway?")) return;
+  try { localStorage.removeItem(TOKEN_KEY); } catch(_){}
+  dirty = false; location.reload();
+});
+
+/* ============ Start ============ */
+async function boot(){
+  let t = null; try { t = localStorage.getItem(TOKEN_KEY); } catch(_){}
+  if (!t){ $("setup").hidden = false; return; }
+  try { await connect(t); start(); }
+  catch(e){
+    if (e.status === 401 || e.status === 403 || e.status === 404){ try { localStorage.removeItem(TOKEN_KEY); } catch(_){} $("setup").hidden = false; $("setupErr").textContent = "The saved token has expired or stopped working. Please make a new one."; }
+    else { $("setup").hidden = false; $("setupErr").textContent = "Couldn't reach GitHub. Check the internet and refresh."; }
+  }
+}
+async function start(){
+  $("setup").hidden = true; $("app").hidden = false;
+  $("status").textContent = "Loading...";
+  try { content = await loadLatestContent(); }
+  catch(e){ toast("Couldn't load the website content. Refresh to try again.", "bad"); return; }
+  const frame = $("site");
+  frame.onload = () => {
+    siteWin = frame.contentWindow; siteDoc = frame.contentDocument;
+    const go = () => { siteWin.SS.content = content; siteWin.SS.render(); decorate(); renderSide(); setDirty(false); };
+    if (siteWin.SS && siteWin.SS.content) go(); else siteDoc.addEventListener("ss:ready", go, {once: true});
+  };
+  frame.src = "index.html?edit=1&t=" + Date.now();
+}
+
+/* ============ Make the page editable ============ */
+const EDIT_CSS = `
+  [data-key]{outline:2px dashed transparent;outline-offset:3px;border-radius:6px;cursor:text;transition:outline-color .15s,background .15s}
+  [data-key]:hover{outline-color:rgba(228,47,117,.55)}
+  [data-key]:focus{outline:2px solid #E42F75;background:rgba(255,255,255,.75)}
+  .thanks [data-key]:focus{background:rgba(0,0,0,.12)}
+  img[data-img], .tile img{cursor:pointer;transition:filter .15s, outline-color .15s;outline:4px solid transparent;outline-offset:-4px}
+  img[data-img]:hover, .tile img:hover{filter:brightness(.88);outline-color:#F3A647}
+  .tile{overflow:hidden}
+  .ss-ctrl{position:absolute;top:8px;left:8px;right:8px;display:flex;gap:6px;z-index:5;justify-content:flex-end}
+  .ss-ctrl button{border:0;background:#fff;color:#B81E5A;font:800 13px Nunito,sans-serif;padding:5px 9px;border-radius:999px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+  .ss-ctrl button:hover{background:#E42F75;color:#fff}
+  .ss-add{display:grid;place-items:center;aspect-ratio:1;border:3px dashed #E42F75;border-radius:22px;background:#FFF1F6;color:#E42F75;font:900 1.2rem Fraunces,serif;cursor:pointer;text-align:center}
+  .ss-add:hover{background:#FDE3EE}
+  .ss-add b{display:block;font-size:3rem;line-height:1}
+  .ss-hint{position:fixed;left:50%;top:12px;transform:translateX(-50%);background:#4A2236;color:#fff;font:800 13px Nunito,sans-serif;padding:6px 14px;border-radius:999px;z-index:100;pointer-events:none;opacity:.9}
+`;
+function decorate(){
+  if (!siteDoc.getElementById("ss-edit-css")){
+    const st = siteDoc.createElement("style"); st.id = "ss-edit-css"; st.textContent = EDIT_CSS; siteDoc.head.appendChild(st);
+    const hint = siteDoc.createElement("div"); hint.className = "ss-hint"; hint.textContent = "Editing mode: click words or photos to change them"; siteDoc.body.appendChild(hint);
+    // Stop links, buttons and the order form from doing anything while editing
+    siteDoc.addEventListener("click", e => {
+      const a = e.target.closest("a[href]");
+      if (a && !(a.getAttribute("href") || "").startsWith("#")) e.preventDefault();
+      if (e.target.closest(".sform button, .ticket button")) e.preventDefault();
+    }, true);
+    siteDoc.addEventListener("submit", e => e.preventDefault(), true);
+    // Text editing
+    siteDoc.addEventListener("input", e => {
+      const el = e.target.closest && e.target.closest("[data-key]"); if (!el) return;
+      setPath(content, el.dataset.key, el.innerText.replace(/\s+/g, " ").trim());
+      setDirty();
+    });
+    siteDoc.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.closest && e.target.closest("[data-key]")){ e.preventDefault(); e.target.blur(); } });
+    siteDoc.addEventListener("paste", e => {
+      if (!(e.target.closest && e.target.closest("[data-key]"))) return;
+      e.preventDefault(); siteDoc.execCommand("insertText", false, (e.clipboardData.getData("text/plain") || "").replace(/\s+/g, " "));
+    });
+    siteDoc.addEventListener("focusout", e => {   // tidy up empty text
+      const el = e.target.closest && e.target.closest("[data-key]"); if (!el) return;
+      if (!el.innerText.trim()){ el.textContent = getPath(content, el.dataset.key) || "..."; }
+    });
+    // Photo clicks
+    siteDoc.addEventListener("click", e => {
+      const img = e.target.closest("img[data-img]");
+      if (img){ e.preventDefault(); pickPhoto({ kind: "slot", key: img.dataset.img, alt: getPath(content, img.dataset.img).alt }); return; }
+      const tileImg = e.target.closest(".tile img");
+      if (tileImg){ const i = +tileImg.closest(".tile").dataset.gi; pickPhoto({ kind: "gallery", index: i, alt: content.gallery.items[i].caption }); return; }
+      const btn = e.target.closest(".ss-ctrl button");
+      if (btn){ e.preventDefault(); e.stopPropagation(); galleryAction(btn.dataset.act, +btn.closest(".tile").dataset.gi); return; }
+      if (e.target.closest(".ss-add")) pickPhoto({ kind: "add" });
+    });
+    // Show not-yet-live photos from GitHub or local preview
+    siteDoc.addEventListener("error", e => {
+      const img = e.target; if (img.tagName !== "IMG") return;
+      const src = img.getAttribute("src") || "";
+      if (previews[src]) img.src = previews[src];
+      else if (src.startsWith("images/") && !img.dataset.retried){ img.dataset.retried = 1; img.src = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${src}`; }
+    }, true);
+  }
+  siteDoc.querySelectorAll("[data-key]").forEach(el => { el.setAttribute("contenteditable", "plaintext-only"); if (el.contentEditable !== "plaintext-only") el.setAttribute("contenteditable", "true"); el.spellcheck = true; });
+  siteDoc.querySelectorAll("img[data-img]").forEach(img => img.title = "Click to change this photo");
+  decorateGallery();
+}
+function decorateGallery(){
+  const grid = siteDoc.getElementById("galleryGrid");
+  const n = content.gallery.items.length;
+  grid.querySelectorAll(".tile").forEach(tile => {
+    const i = +tile.dataset.gi;
+    const c = siteDoc.createElement("div"); c.className = "ss-ctrl";
+    c.innerHTML = `${i > 0 ? '<button data-act="left" title="Move earlier">◀</button>' : ""}${i < n-1 ? '<button data-act="right" title="Move later">▶</button>' : ""}<button data-act="remove" title="Remove from gallery">✕ Remove</button>`;
+    tile.appendChild(c);
+    const img = tile.querySelector("img"); if (img) img.title = "Click to swap this photo";
+  });
+  const add = siteDoc.createElement("button"); add.type = "button"; add.className = "ss-add"; add.innerHTML = "<span><b>+</b>Add a photo</span>";
+  grid.appendChild(add);
+}
+function refreshGallery(){ siteWin.SS.renderGallery(); siteWin.SS.observeReveals(); applyPreviews(); decorateGallery(); }
+function applyPreviews(){ siteDoc.querySelectorAll("img").forEach(img => { const s = img.getAttribute("src"); if (previews[s]) img.src = previews[s]; }); }
+function galleryAction(act, i){
+  const items = content.gallery.items;
+  if (act === "remove"){
+    if (!confirm("Remove this photo from the gallery?")) return;
+    items.splice(i, 1);
+  } else if (act === "left" && i > 0){ [items[i-1], items[i]] = [items[i], items[i-1]]; }
+  else if (act === "right" && i < items.length - 1){ [items[i+1], items[i]] = [items[i], items[i+1]]; }
+  refreshGallery(); setDirty();
+}
+
+/* ============ Photos ============ */
+let pending = null, processed = null;
+function pickPhoto(target){ pending = target; $("filePick").value = ""; $("filePick").click(); }
+$("filePick").addEventListener("change", async () => {
+  const file = $("filePick").files[0]; if (!file || !pending) return;
+  try {
+    processed = await processPhoto(file);
+    $("pmPreview").src = processed.dataUrl;
+    $("pmAlt").value = pending.alt || "";
+    $("pmTitle").textContent = pending.kind === "add" ? "Add to gallery" : "Swap photo";
+    $("photoModal").classList.add("show"); $("pmAlt").focus();
+  } catch(e){ toast("Sorry, that photo type won't work. Try a JPG or PNG photo.", "bad"); }
+});
+async function processPhoto(file){
+  // Crops to a centred square, resizes, and re-saves as JPG (this also removes hidden location data)
+  const bmp = await createImageBitmap(file, { imageOrientation: "from-image" });
+  const side = Math.min(bmp.width, bmp.height), out = Math.min(PHOTO_SIZE, side);
+  const cv = document.createElement("canvas"); cv.width = cv.height = out;
+  const cx = cv.getContext("2d"); cx.imageSmoothingQuality = "high";
+  cx.drawImage(bmp, (bmp.width - side) / 2, (bmp.height - side) / 2, side, side, 0, 0, out, out);
+  const dataUrl = cv.toDataURL("image/jpeg", 0.82);
+  return { dataUrl, b64: dataUrl.split(",")[1] };
+}
+$("pmCancel").addEventListener("click", () => { $("photoModal").classList.remove("show"); pending = processed = null; });
+$("pmOk").addEventListener("click", () => {
+  const alt = $("pmAlt").value.trim() || "A Sprinkle Studios bake";
+  const stamp = new Date().toISOString().replace(/[-:T]/g, "").slice(0, 14);
+  const path = `images/upload-${stamp}-${Math.random().toString(36).slice(2, 6)}.jpg`;
+  uploads[path] = processed.b64; previews[path] = processed.dataUrl;
+  if (pending.kind === "slot"){ setPath(content, pending.key, { src: path, alt }); siteWin.SS.applyText(); applyPreviews(); }
+  else if (pending.kind === "gallery"){ content.gallery.items[pending.index] = { src: path, caption: alt }; refreshGallery(); }
+  else { content.gallery.items.push({ src: path, caption: alt }); refreshGallery(); }
+  $("photoModal").classList.remove("show"); pending = processed = null;
+  setDirty(); toast("Photo added. Press Publish to put it live.");
+});
+
+/* ============ Sidebar: markets + favourites ============ */
+function renderSide(){
+  const today = new Date().toISOString().slice(0, 10);
+  const ed = $("marketsEd");
+  ed.innerHTML = "";
+  content.markets.list.forEach((m, i) => {
+    const d = document.createElement("div"); d.className = "market" + (m.date && m.date < today ? " past" : "");
+    d.innerHTML = `
+      <label>Market name</label><input data-f="name" maxlength="60">
+      <div class="grid2"><div><label>Date</label><input data-f="date" type="date"></div><div><label>Suburb</label><input data-f="suburb" maxlength="40"></div></div>
+      <div class="grid2"><div><label>Starts</label><input data-f="start" type="time"></div><div><label>Ends</label><input data-f="end" type="time"></div></div>
+      <label>Little note (optional)</label><input data-f="note" maxlength="80">
+      <div class="row-end"><span class="flag">${m.date && m.date < today ? "Past: hidden on the website" : ""}</span><button class="btn-link" data-del>Remove</button></div>`;
+    d.querySelectorAll("input").forEach(inp => {
+      inp.value = m[inp.dataset.f] || "";
+      inp.addEventListener("input", () => { m[inp.dataset.f] = inp.value.trim(); siteWin.SS.renderMarkets(); siteWin.SS.observeReveals(); setDirty(); });
+      inp.addEventListener("change", () => { if (inp.dataset.f === "date") renderSide(); });
+    });
+    d.querySelector("[data-del]").addEventListener("click", () => {
+      if (!confirm("Remove this market?")) return;
+      content.markets.list.splice(i, 1); renderSide(); siteWin.SS.renderMarkets(); siteWin.SS.observeReveals(); setDirty();
+    });
+    ed.appendChild(d);
+  });
+  const fv = $("favesEd"); fv.innerHTML = "";
+  content.about.faves.forEach((f, i) => {
+    const c = document.createElement("span"); c.className = "chip";
+    c.innerHTML = `<span></span><button title="Remove" aria-label="Remove">×</button>`;
+    c.firstChild.textContent = f;
+    c.querySelector("button").addEventListener("click", () => { content.about.faves.splice(i, 1); renderSide(); siteWin.SS.renderFaves(); setDirty(); });
+    fv.appendChild(c);
+  });
+}
+$("addMarket").addEventListener("click", () => {
+  content.markets.list.push({ date: "", start: "09:00", end: "13:00", name: "New market", suburb: "", note: "" });
+  renderSide(); setDirty();
+  const all = $("marketsEd").querySelectorAll(".market"); all[all.length-1].querySelector("input").focus();
+});
+function addFave(){ const v = $("faveIn").value.trim(); if (!v) return; content.about.faves.push(v); $("faveIn").value = ""; renderSide(); siteWin.SS.renderFaves(); setDirty(); }
+$("addFave").addEventListener("click", addFave);
+$("faveIn").addEventListener("keydown", e => { if (e.key === "Enter") addFave(); });
+
+/* ============ Publish ============ */
+$("publishBtn").addEventListener("click", publish);
+async function publish(){
+  if (siteDoc.activeElement) siteDoc.activeElement.blur();
+  busy(true, "Publishing...");
+  try {
+    const json = JSON.stringify(content, null, 2) + "\n";
+    const used = Object.keys(uploads).filter(p => json.includes(`"${p}"`));
+    const ref = await gh(`/git/ref/heads/${BRANCH}`);
+    const head = await gh(`/git/commits/${ref.object.sha}`);
+    const tree = [];
+    for (const p of used){
+      const b = await gh("/git/blobs", { method: "POST", body: JSON.stringify({ content: uploads[p], encoding: "base64" }) });
+      tree.push({ path: p, mode: "100644", type: "blob", sha: b.sha });
+    }
+    const cb = await gh("/git/blobs", { method: "POST", body: JSON.stringify({ content: utf8ToB64(json), encoding: "base64" }) });
+    tree.push({ path: "content.json", mode: "100644", type: "blob", sha: cb.sha });
+    const nt = await gh("/git/trees", { method: "POST", body: JSON.stringify({ base_tree: head.tree.sha, tree }) });
+    const nc = await gh("/git/commits", { method: "POST", body: JSON.stringify({ message: "Website update from the Sprinkle Studios editor", tree: nt.sha, parents: [ref.object.sha] }) });
+    await gh(`/git/refs/heads/${BRANCH}`, { method: "PATCH", body: JSON.stringify({ sha: nc.sha }) });
+    Object.keys(uploads).forEach(k => delete uploads[k]);
+    setDirty(false);
+    busy(false);
+    toast("Published! Your changes will be live in about a minute. 🎉", "good");
+  } catch(e){
+    busy(false);
+    toast(e.status === 401 ? "GitHub sign-in has expired. Ask a grown-up to reconnect." :
+          e.status === 422 ? "Someone else changed the site at the same time. Press Publish again." :
+          "Publishing didn't work. Check the internet and press Publish again.", "bad");
+    console.error(e, e.detail);
+  }
+}
+$("discardBtn").addEventListener("click", () => { if (confirm("Undo everything since you last published?")){ dirty = false; location.reload(); } });
+window.addEventListener("beforeunload", e => { if (dirty){ e.preventDefault(); e.returnValue = ""; } });
+
+/* ============ View toggle ============ */
+document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".seg button").forEach(x => x.classList.toggle("on", x === b));
+  $("stage").classList.toggle("phone", b.dataset.view === "phone");
+}));
+
+boot();
+</script>
+</body>
+</html>

@@ -237,7 +237,7 @@
       <div class="hero-card reveal">
         <h1>Sprinkle Studios</h1>
         <img class="hero-logo" src="logo.png" alt="Sprinkle Studios logo with a cupcake" id="heroLogo">
-        <p class="tagline">We're all about baking sweet treats that make you grin, from cupcakes to cookies and everything in between!</p>
+        <p class="tagline" data-key="hero.tagline">We're all about baking sweet treats that make you grin, from cupcakes to cookies and everything in between!</p>
         <a class="btn btn-pink pop" href="#markets">Find our stall</a>
         <a class="btn btn-orange pop" href="#order">Order a special cake</a>
       </div>
@@ -248,9 +248,9 @@
   <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--pink-soft)"><path d="M0,30 C240,70 480,-10 720,30 C960,70 1200,-10 1440,30 L1440,60 L0,60 Z" fill="#FFF9F4"/></svg>
   <section class="markets" id="markets">
     <div class="wrap">
-      <span class="kicker">Come say hi</span>
-      <h2>Upcoming markets</h2>
-      <p style="text-align:center;max-width:520px;margin:0 auto">Fresh bakes, big smiles. We take cash and card. Get in early before the cupcakes run out!</p>
+      <span class="kicker" data-key="markets.kicker">Come say hi</span>
+      <h2 data-key="markets.title">Upcoming markets</h2>
+      <p style="text-align:center;max-width:520px;margin:0 auto" data-key="markets.intro">Fresh bakes, big smiles. We take cash and card. Get in early before the cupcakes run out!</p>
       <div class="market-list" id="marketList"></div>
     </div>
   </section>
@@ -259,33 +259,26 @@
   <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)"><path d="M0,30 C240,-10 480,70 720,30 C960,-10 1200,70 1440,30 L1440,60 L0,60 Z" fill="#FDE3EE"/></svg>
   <section class="about" id="about">
     <div class="wrap">
-      <span class="kicker">The baker</span>
-      <h2>Meet Maddy</h2>
+      <span class="kicker" data-key="about.kicker">The baker</span>
+      <h2 data-key="about.title">Meet Maddy</h2>
       <div class="about-grid">
         <div class="portrait reveal" id="portrait">
-          <img src="images/maddy.jpg" alt="Maddy holding two boxes of her bakes">
+          <img src="images/maddy.jpg" alt="Maddy holding two boxes of her bakes" data-img="about.photo">
         </div>
         <div class="speech reveal">
-          <p>Welcome to Sprinkle Studios! I'm Maddy, an 11-year-old baker behind Sprinkle Studios.</p>
-          <p>I've basically been baking since I could reach the counter, and I absolutely love making all sorts of goodies, like:</p>
-          <ul class="faves">
-            <li>biscuits</li>
-            <li>chocolate cakes</li>
-            <li>lemon cheesecakes</li>
-            <li>muffins</li>
-            <li>cupcakes</li>
-            <li>donuts</li>
-          </ul>
-          <p>Making people smile with my treats is my favourite thing to do!</p>
-          <p class="sign">Maddy x</p>
+          <p data-key="about.p1">Welcome to Sprinkle Studios! I'm Maddy, an 11-year-old baker behind Sprinkle Studios.</p>
+          <p data-key="about.p2">I've basically been baking since I could reach the counter, and I absolutely love making all sorts of goodies, like:</p>
+          <ul class="faves" id="faves"></ul>
+          <p data-key="about.p3">Making people smile with my treats is my favourite thing to do!</p>
+          <p class="sign" data-key="about.sign">Maddy x</p>
         </div>
       </div>
-      <h3 class="bts-title">Behind the scenes</h3>
+      <h3 class="bts-title" data-key="about.btsTitle">Behind the scenes</h3>
       <div class="bts">
-        <figure class="polaroid reveal"><img src="images/bts-first-cake.jpg" alt="A younger Maddy holding a sprinkle-topped cake" loading="lazy"><figcaption>Where it all started</figcaption></figure>
-        <figure class="polaroid reveal"><img src="images/bts-reindeer-night.jpg" alt="Maddy with a rack of reindeer biscuits" loading="lazy"><figcaption>Reindeer biscuit night</figcaption></figure>
-        <figure class="polaroid reveal"><img src="images/bts-home-stall.jpg" alt="Maddy beside a test-run stall table full of bakes" loading="lazy"><figcaption>Stall test run</figcaption></figure>
-        <figure class="polaroid reveal"><img src="images/bts-market-day.jpg" alt="Maddy serving treats from the Sprinkle Studios car boot stall" loading="lazy"><figcaption>Car boot market!</figcaption></figure>
+        <figure class="polaroid reveal"><img src="images/bts-first-cake.jpg" alt="A younger Maddy holding a sprinkle-topped cake" loading="lazy" data-img="about.bts.0.img"><figcaption data-key="about.bts.0.caption">Where it all started</figcaption></figure>
+        <figure class="polaroid reveal"><img src="images/bts-reindeer-night.jpg" alt="Maddy with a rack of reindeer biscuits" loading="lazy" data-img="about.bts.1.img"><figcaption data-key="about.bts.1.caption">Reindeer biscuit night</figcaption></figure>
+        <figure class="polaroid reveal"><img src="images/bts-home-stall.jpg" alt="Maddy beside a test-run stall table full of bakes" loading="lazy" data-img="about.bts.2.img"><figcaption data-key="about.bts.2.caption">Stall test run</figcaption></figure>
+        <figure class="polaroid reveal"><img src="images/bts-market-day.jpg" alt="Maddy serving treats from the Sprinkle Studios car boot stall" loading="lazy" data-img="about.bts.3.img"><figcaption data-key="about.bts.3.caption">Car boot market!</figcaption></figure>
       </div>
     </div>
   </section>
@@ -294,32 +287,32 @@
   <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--pink-soft)"><path d="M0,30 C240,70 480,-10 720,30 C960,70 1200,-10 1440,30 L1440,60 L0,60 Z" fill="#FFFFFF"/></svg>
   <section class="treats" id="treats">
     <div class="wrap">
-      <span class="kicker">What I bake</span>
-      <h2>Sweet treats</h2>
-      <p class="treats-intro">Everything is baked by me, with lots of love (and lots of sprinkles).</p>
+      <span class="kicker" data-key="treats.kicker">What I bake</span>
+      <h2 data-key="treats.title">Sweet treats</h2>
+      <p class="treats-intro" data-key="treats.intro">Everything is baked by me, with lots of love (and lots of sprinkles).</p>
       <div class="treat-grid">
         <article class="treat reveal">
-          <img src="images/pink-cookie-layer-cake.jpg" alt="A chocolate layer cake topped with pink cream and biscuits" loading="lazy">
-          <h3>Cakes</h3>
-          <p>Layer cakes, party cakes and themed creations, decorated just for your celebration.</p>
+          <img src="images/pink-cookie-layer-cake.jpg" alt="A chocolate layer cake topped with pink cream and biscuits" loading="lazy" data-img="treats.items.0.img">
+          <h3 data-key="treats.items.0.title">Cakes</h3>
+          <p data-key="treats.items.0.text">Layer cakes, party cakes and themed creations, decorated just for your celebration.</p>
           <a class="btn btn-pink pop" href="#order" data-choice="Birthday or party cake">Order<span class="lg"> a cake</span></a>
         </article>
         <article class="treat reveal">
-          <img src="images/jam-heart-biscuits.jpg" alt="Round biscuits with jam heart centres" loading="lazy">
-          <h3>Cookies</h3>
-          <p>Jam hearts, reindeer and flower biscuits that are almost too cute to eat.</p>
+          <img src="images/jam-heart-biscuits.jpg" alt="Round biscuits with jam heart centres" loading="lazy" data-img="treats.items.1.img">
+          <h3 data-key="treats.items.1.title">Cookies</h3>
+          <p data-key="treats.items.1.text">Jam hearts, reindeer and flower biscuits that are almost too cute to eat.</p>
           <a class="btn btn-pink pop" href="#order" data-choice="Cookies">Order<span class="lg"> cookies</span></a>
         </article>
         <article class="treat reveal">
-          <img src="images/rainbow-cupcakes.jpg" alt="Trays of rainbow and Easter cupcakes" loading="lazy">
-          <h3>Cupcakes</h3>
-          <p>Fluffy cupcakes piled high with swirly icing and fun toppers.</p>
+          <img src="images/rainbow-cupcakes.jpg" alt="Trays of rainbow and Easter cupcakes" loading="lazy" data-img="treats.items.2.img">
+          <h3 data-key="treats.items.2.title">Cupcakes</h3>
+          <p data-key="treats.items.2.text">Fluffy cupcakes piled high with swirly icing and fun toppers.</p>
           <a class="btn btn-pink pop" href="#order" data-choice="Cupcakes">Order<span class="lg"> cupcakes</span></a>
         </article>
         <article class="treat reveal">
-          <img src="images/dog-biscuits.jpg" alt="Biscuits shaped like puppy faces" loading="lazy">
-          <h3>Cute biscuits</h3>
-          <p>Biscuits with cheeky little faces that always make people smile.</p>
+          <img src="images/dog-biscuits.jpg" alt="Biscuits shaped like puppy faces" loading="lazy" data-img="treats.items.3.img">
+          <h3 data-key="treats.items.3.title">Cute biscuits</h3>
+          <p data-key="treats.items.3.text">Biscuits with cheeky little faces that always make people smile.</p>
           <a class="btn btn-pink pop" href="#order" data-choice="Cookies">Order<span class="lg"> cute biscuits</span></a>
         </article>
       </div>
@@ -330,8 +323,8 @@
   <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:#fff"><path d="M0,30 C240,-10 480,70 720,30 C960,-10 1200,70 1440,30 L1440,60 L0,60 Z" fill="#FFF9F4"/></svg>
   <section class="gallery" id="gallery">
     <div class="wrap">
-      <span class="kicker">Fresh out of the oven</span>
-      <h2>Cakes &amp; bakes</h2>
+      <span class="kicker" data-key="gallery.kicker">Fresh out of the oven</span>
+      <h2 data-key="gallery.title">Cakes &amp; bakes</h2>
       <div class="grid" id="galleryGrid"></div>
     </div>
   </section>
@@ -340,9 +333,9 @@
   <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)"><path d="M0,30 C240,-10 480,70 720,30 C960,-10 1200,70 1440,30 L1440,60 L0,60 Z" fill="#FFEBD1"/></svg>
   <section class="order" id="order">
     <div class="wrap">
-      <span class="kicker">Birthdays, parties &amp; treats</span>
-      <h2>Order something special</h2>
-      <p class="order-intro">Have a question, some feedback, or a cake idea for a special day? Don't hesitate to reach out. Tell us what you're dreaming of and we'll get back to you.</p>
+      <span class="kicker" data-key="order.kicker">Birthdays, parties &amp; treats</span>
+      <h2 data-key="order.title">Order something special</h2>
+      <p class="order-intro" data-key="order.intro">Have a question, some feedback, or a cake idea for a special day? Don't hesitate to reach out. Tell us what you're dreaming of and we'll get back to you.</p>
       <div class="order-card" id="orderCard">
         <form class="sform" id="orderForm" novalidate>
           <div class="row">
@@ -417,9 +410,9 @@
   <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" style="background:var(--orange-soft)"><path d="M0,30 C240,70 480,-10 720,30 C960,70 1200,-10 1440,30 L1440,60 L0,60 Z" fill="#E42F75"/></svg>
   <section class="thanks">
     <div class="wrap">
-      <h2>Thank you, people of Earth!</h2>
-      <p>Thanks for visiting! We hope you're leaving inspired to treat yourself.</p>
-      <p>If you're craving more, don't hesitate to reach out. I would love to sweeten your day even more!</p>
+      <h2 data-key="thanks.title">Thank you, people of Earth!</h2>
+      <p data-key="thanks.p1">Thanks for visiting! We hope you're leaving inspired to treat yourself.</p>
+      <p data-key="thanks.p2">If you're craving more, don't hesitate to reach out. I would love to sweeten your day even more!</p>
       <a class="btn btn-ghost pop" href="#top">Back to the top</a>
     </div>
   </section>
@@ -434,31 +427,8 @@
    EASY EDITS: change the bits below, nothing else needed.
    ========================================================= */
 
-// Market stalls. Past dates hide automatically. Times are 24-hour.
-const MARKETS = [
-  { date: "2026-11-21", start: "09:00", end: "14:00", name: "Newington Marketplace", suburb: "Newington", note: "My first proper market stall!" },
-];
-
-// Gallery photos. Upload pictures to the "images" folder, then list them here.
-// Example: { src: "images/carrot-cake.jpg", caption: "Carrot cake" },
-const GALLERY = [
-  { video: "images/flower-biscuits.mp4", poster: "images/flower-biscuits-poster.jpg", caption: "Flower puzzle biscuits", big: true },
-  { src: "images/beach-cake.jpg", caption: "Beach party cake" },
-  { src: "images/rainbow-cupcakes.jpg", caption: "Rainbow & Easter cupcakes" },
-  { src: "images/dog-biscuits.jpg", caption: "Cute biscuits" },
-  { src: "images/reindeer-biscuits.jpg", caption: "Reindeer biscuits" },
-  { src: "images/pink-cookie-layer-cake.jpg", caption: "Pink cookie layer cake" },
-  { src: "images/berry-pavlova.jpg", caption: "Berry pavlova" },
-  { src: "images/jam-heart-biscuits.jpg", caption: "Jam heart biscuits" },
-  { src: "images/heart-cake.jpg", caption: "Pink heart cake" },
-  { src: "images/princess-cake.jpg", caption: "Princess doll cake" },
-  { src: "images/strawberry-trifle-cups.jpg", caption: "Strawberry trifle cups" },
-  { src: "images/cookies-cream-squares.jpg", caption: "Cookies & cream squares" },
-  { src: "images/choc-profiteroles.jpg", caption: "Chocolate profiteroles" },
-];
-
-// Show a "more coming soon" tile at the end of the gallery? (true / false)
-const MORE_COMING = false;
+// Words, photos, market dates and the gallery live in content.json
+// (edit them with the visual editor at /admin.html).
 
 // Enquiries are sent into this Google Form (responses + email alerts live there).
 const GOOGLE_FORM_ID = "1FAIpQLSdkf-PEpG4AUY7u-VoOVSbOv0J5EZQQGETuifnP8g5HqqqJPQ";
@@ -527,87 +497,98 @@ document.querySelectorAll(".pop").forEach(b => b.addEventListener("click", e => 
   const r = b.getBoundingClientRect(); burst(r.left + r.width/2, r.top + r.height/2);
 }));
 
-// Markets
-(function(){
+// ---------- Content (loaded from content.json) ----------
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const getPath = (o, p) => p.split(".").reduce((a, k) => a == null ? a : a[k], o);
+const SS = window.SS = { content: null, editing: new URLSearchParams(location.search).has("edit") };
+
+SS.applyText = function(){
+  document.querySelectorAll("[data-key]").forEach(el => {
+    const v = getPath(SS.content, el.dataset.key);
+    if (typeof v === "string" && document.activeElement !== el) el.textContent = v;
+  });
+  document.querySelectorAll("[data-img]").forEach(img => {
+    const v = getPath(SS.content, img.dataset.img);
+    if (v && v.src){ if (img.getAttribute("src") !== v.src) img.src = v.src; img.alt = v.alt || ""; }
+  });
+};
+
+SS.renderFaves = function(){
+  const ul = document.getElementById("faves");
+  ul.innerHTML = (SS.content.about.faves || []).map(f => `<li>${esc(f)}</li>`).join("");
+};
+
+const fmtTime = t => { if (!t) return ""; let [h,m] = t.split(":").map(Number); const ap = h>=12?"pm":"am"; h = h%12||12; return h + (m?":"+String(m).padStart(2,"0"):"") + ap; };
+SS.renderMarkets = function(){
   const list = document.getElementById("marketList");
   const today = new Date(); today.setHours(0,0,0,0);
-  const upcoming = MARKETS
+  const upcoming = SS.upcoming = (SS.content.markets.list || [])
+    .filter(m => m.date)
     .map(m => ({...m, d: new Date(m.date + "T00:00:00")}))
     .filter(m => m.d >= today)
     .sort((a,b) => a.d - b.d);
-  const fmtTime = t => { let [h,m] = t.split(":").map(Number); const ap = h>=12?"pm":"am"; h = h%12||12; return h + (m?":"+String(m).padStart(2,"0"):"") + ap; };
   if (!upcoming.length){
     list.innerHTML = `<div class="no-markets reveal"><h3>New dates coming soon!</h3><p>We're busy baking. Check back soon for our next market.</p></div>`;
     return;
   }
-  upcoming.forEach((m, i) => {
+  list.innerHTML = upcoming.map((m, i) => {
     const dow = m.d.toLocaleDateString("en-AU",{weekday:"short"});
     const mon = m.d.toLocaleDateString("en-AU",{month:"short"});
-    const map = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(m.name + " " + m.suburb + " NSW");
-    const el = document.createElement("article");
-    el.className = "ticket reveal";
-    el.innerHTML = `
+    const map = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent((m.name||"") + " " + (m.suburb||"") + " NSW");
+    const times = m.start ? `${fmtTime(m.start)}${m.end ? " to " + fmtTime(m.end) : ""} &middot; ` : "";
+    return `<article class="ticket reveal">
       <div class="date"><span class="dow">${dow}</span><span class="day">${m.d.getDate()}</span><span class="mon">${mon}</span></div>
       <div class="info">
         ${i===0 ? '<span class="badge">Next stall</span>' : ""}
-        <h3>${m.name}</h3>
-        <p class="meta">${fmtTime(m.start)} to ${fmtTime(m.end)} &middot; ${m.suburb}${m.note ? "<br>" + m.note : ""}</p>
+        <h3>${esc(m.name)}</h3>
+        <p class="meta">${times}${esc(m.suburb)}${m.note ? "<br>" + esc(m.note) : ""}</p>
         <div class="actions">
           <a class="btn btn-pink" href="${map}" target="_blank" rel="noopener">Map</a>
           <button class="btn btn-ghost" type="button" data-i="${i}">Add to calendar</button>
         </div>
-      </div>`;
-    list.appendChild(el);
-  });
-  list.addEventListener("click", e => {
-    const b = e.target.closest("button[data-i]"); if (!b) return;
-    const m = upcoming[+b.dataset.i];
-    const stamp = (d,t) => d.replace(/-/g,"") + "T" + t.replace(":","") + "00";
-    const ics = [
-      "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Sprinkle Studios//EN","BEGIN:VEVENT",
-      "UID:" + m.date + "-sprinklestudios",
-      "DTSTAMP:" + new Date().toISOString().replace(/[-:]/g,"").split(".")[0] + "Z",
-      "DTSTART;TZID=Australia/Sydney:" + stamp(m.date,m.start),
-      "DTEND;TZID=Australia/Sydney:" + stamp(m.date,m.end),
-      "SUMMARY:Sprinkle Studios bake stall",
-      "LOCATION:" + m.name + ", " + m.suburb + " NSW",
-      "END:VEVENT","END:VCALENDAR"].join("\r\n");
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([ics], {type:"text/calendar"}));
-    a.download = "sprinkle-studios-" + m.date + ".ics";
-    a.click();
-    burst(e.clientX, e.clientY);
-  });
-})();
+      </div></article>`;
+  }).join("");
+};
+document.getElementById("marketList").addEventListener("click", e => {
+  const b = e.target.closest("button[data-i]"); if (!b || SS.editing) return;
+  const m = SS.upcoming[+b.dataset.i];
+  const stamp = (d,t) => d.replace(/-/g,"") + "T" + (t||"09:00").replace(":","") + "00";
+  const ics = [
+    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Sprinkle Studios//EN","BEGIN:VEVENT",
+    "UID:" + m.date + "-sprinklestudios",
+    "DTSTAMP:" + new Date().toISOString().replace(/[-:]/g,"").split(".")[0] + "Z",
+    "DTSTART;TZID=Australia/Sydney:" + stamp(m.date,m.start),
+    "DTEND;TZID=Australia/Sydney:" + stamp(m.date,m.end || m.start),
+    "SUMMARY:Sprinkle Studios bake stall",
+    "LOCATION:" + m.name + ", " + m.suburb + " NSW",
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], {type:"text/calendar"}));
+  a.download = "sprinkle-studios-" + m.date + ".ics";
+  a.click();
+  burst(e.clientX, e.clientY);
+});
 
-// Gallery
-(function(){
+SS.renderGallery = function(){
   const grid = document.getElementById("galleryGrid");
-  if (GALLERY.length){
-    GALLERY.forEach(p => {
-      const f = document.createElement("figure");
-      f.className = "tile reveal" + (p.big ? " big" : "");
-      const media = p.video
-        ? `<video src="${p.video}" poster="${p.poster || ""}" ${reduceMotion ? "controls" : "autoplay"} muted loop playsinline preload="metadata" aria-label="${p.caption || "Bake video"}"></video><span class="play-badge">Video</span>`
-        : `<img src="${p.src}" alt="${p.caption || "A Sprinkle Studios bake"}" loading="lazy">`;
-      f.innerHTML = media;  // captions are used as alt text only
-      grid.appendChild(f);
-    });
-    if (MORE_COMING){
-      const f = document.createElement("figure");
-      f.className = "tile placeholder reveal";
-      f.innerHTML = `<span>More bakes<small>coming soon!</small></span>`;
-      grid.appendChild(f);
-    }
-  } else {
-    ["Cupcakes","Cookies","Cute biscuits","Carrot cake","Chocolate cake","Lemon cheesecake"].forEach(name => {
-      const f = document.createElement("figure");
-      f.className = "tile placeholder reveal";
-      f.innerHTML = `<span>${name}<small>Photo coming soon</small></span>`;
-      grid.appendChild(f);
-    });
-  }
-})();
+  const items = SS.content.gallery.items || [];
+  grid.innerHTML = items.map((p, i) => {
+    const media = p.video
+      ? `<video src="${esc(p.video)}" poster="${esc(p.poster)}" ${reduceMotion || SS.editing ? "" : "autoplay"} muted loop playsinline preload="metadata" aria-label="${esc(p.caption || "Bake video")}"></video><span class="play-badge">Video</span>`
+      : `<img src="${esc(p.src)}" alt="${esc(p.caption || "A Sprinkle Studios bake")}" loading="lazy">`;
+    return `<figure class="tile reveal${p.big ? " big" : ""}" data-gi="${i}">${media}</figure>`;
+  }).join("");
+  if (!SS.editing) grid.querySelectorAll("video").forEach(v => { if (!reduceMotion) v.play().catch(()=>{}); });
+};
+
+SS.render = function(){
+  SS.applyText(); SS.renderFaves(); SS.renderMarkets(); SS.renderGallery(); SS.observeReveals();
+};
+
+fetch("content.json?v=" + Date.now(), {cache: "no-store"})
+  .then(r => r.json())
+  .then(c => { SS.content = c; SS.render(); document.dispatchEvent(new Event("ss:ready")); })
+  .catch(err => console.error("Could not load content.json", err));
 
 // Order form
 (function(){
@@ -693,15 +674,16 @@ document.querySelectorAll(".pop").forEach(b => b.addEventListener("click", e => 
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Scroll reveal
-(function(){
-  const els = document.querySelectorAll(".reveal");
-  if (!("IntersectionObserver" in window) || reduceMotion){ els.forEach(e => e.classList.add("in")); return; }
-  const io = new IntersectionObserver(entries => entries.forEach(en => {
-    if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+// Scroll reveal (re-run after content renders)
+SS.observeReveals = function(){
+  const els = document.querySelectorAll(".reveal:not(.in)");
+  if (!("IntersectionObserver" in window) || reduceMotion || SS.editing){ els.forEach(e => e.classList.add("in")); return; }
+  if (!SS._io) SS._io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting){ en.target.classList.add("in"); SS._io.unobserve(en.target); }
   }), { threshold: .15 });
-  els.forEach(e => io.observe(e));
-})();
+  els.forEach(e => SS._io.observe(e));
+};
+SS.observeReveals();
 </script>
 </body>
 </html>

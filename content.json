@@ -1,0 +1,181 @@
+{
+  "_note": "Edited by the Sprinkle Studios editor (admin.html). Text is plain text only.",
+  "hero": {
+    "tagline": "We're all about baking sweet treats that make you grin, from cupcakes to cookies and everything in between!"
+  },
+  "markets": {
+    "kicker": "Come say hi",
+    "title": "Upcoming markets",
+    "intro": "Fresh bakes, big smiles. We take cash and card. Get in early before the cupcakes run out!",
+    "list": [
+      {
+        "date": "2026-11-21",
+        "start": "09:00",
+        "end": "14:00",
+        "name": "Newington Marketplace",
+        "suburb": "Newington",
+        "note": "My first proper market stall!"
+      }
+    ]
+  },
+  "about": {
+    "kicker": "The baker",
+    "title": "Meet Maddy",
+    "photo": {
+      "src": "images/maddy.jpg",
+      "alt": "Maddy holding two boxes of her bakes"
+    },
+    "p1": "Welcome to Sprinkle Studios! I'm Maddy, an 11-year-old baker behind Sprinkle Studios.",
+    "p2": "I've basically been baking since I could reach the counter, and I absolutely love making all sorts of goodies, like:",
+    "faves": [
+      "biscuits",
+      "chocolate cakes",
+      "lemon cheesecakes",
+      "muffins",
+      "cupcakes",
+      "donuts"
+    ],
+    "p3": "Making people smile with my treats is my favourite thing to do!",
+    "sign": "Maddy x",
+    "btsTitle": "Behind the scenes",
+    "bts": [
+      {
+        "img": {
+          "src": "images/bts-first-cake.jpg",
+          "alt": "A younger Maddy holding a sprinkle-topped cake"
+        },
+        "caption": "Where it all started"
+      },
+      {
+        "img": {
+          "src": "images/bts-reindeer-night.jpg",
+          "alt": "Maddy with a rack of reindeer biscuits"
+        },
+        "caption": "Reindeer biscuit night"
+      },
+      {
+        "img": {
+          "src": "images/bts-home-stall.jpg",
+          "alt": "Maddy beside a test-run stall table full of bakes"
+        },
+        "caption": "Stall test run"
+      },
+      {
+        "img": {
+          "src": "images/bts-market-day.jpg",
+          "alt": "Maddy serving treats from the Sprinkle Studios car boot stall"
+        },
+        "caption": "Car boot market!"
+      }
+    ]
+  },
+  "treats": {
+    "kicker": "What I bake",
+    "title": "Sweet treats",
+    "intro": "Everything is baked by me, with lots of love (and lots of sprinkles).",
+    "items": [
+      {
+        "img": {
+          "src": "images/pink-cookie-layer-cake.jpg",
+          "alt": "A chocolate layer cake topped with pink cream and biscuits"
+        },
+        "title": "Cakes",
+        "text": "Layer cakes, party cakes and themed creations, decorated just for your celebration."
+      },
+      {
+        "img": {
+          "src": "images/jam-heart-biscuits.jpg",
+          "alt": "Round biscuits with jam heart centres"
+        },
+        "title": "Cookies",
+        "text": "Jam hearts, reindeer and flower biscuits that are almost too cute to eat."
+      },
+      {
+        "img": {
+          "src": "images/rainbow-cupcakes.jpg",
+          "alt": "Trays of rainbow and Easter cupcakes"
+        },
+        "title": "Cupcakes",
+        "text": "Fluffy cupcakes piled high with swirly icing and fun toppers."
+      },
+      {
+        "img": {
+          "src": "images/dog-biscuits.jpg",
+          "alt": "Biscuits shaped like puppy faces"
+        },
+        "title": "Cute biscuits",
+        "text": "Biscuits with cheeky little faces that always make people smile."
+      }
+    ]
+  },
+  "gallery": {
+    "kicker": "Fresh out of the oven",
+    "title": "Cakes & bakes",
+    "items": [
+      {
+        "video": "images/flower-biscuits.mp4",
+        "poster": "images/flower-biscuits-poster.jpg",
+        "caption": "Flower puzzle biscuits",
+        "big": true
+      },
+      {
+        "src": "images/beach-cake.jpg",
+        "caption": "Beach party cake"
+      },
+      {
+        "src": "images/rainbow-cupcakes.jpg",
+        "caption": "Rainbow & Easter cupcakes"
+      },
+      {
+        "src": "images/dog-biscuits.jpg",
+        "caption": "Cute biscuits"
+      },
+      {
+        "src": "images/reindeer-biscuits.jpg",
+        "caption": "Reindeer biscuits"
+      },
+      {
+        "src": "images/pink-cookie-layer-cake.jpg",
+        "caption": "Pink cookie layer cake"
+      },
+      {
+        "src": "images/berry-pavlova.jpg",
+        "caption": "Berry pavlova"
+      },
+      {
+        "src": "images/jam-heart-biscuits.jpg",
+        "caption": "Jam heart biscuits"
+      },
+      {
+        "src": "images/heart-cake.jpg",
+        "caption": "Pink heart cake"
+      },
+      {
+        "src": "images/princess-cake.jpg",
+        "caption": "Princess doll cake"
+      },
+      {
+        "src": "images/strawberry-trifle-cups.jpg",
+        "caption": "Strawberry trifle cups"
+      },
+      {
+        "src": "images/cookies-cream-squares.jpg",
+        "caption": "Cookies & cream squares"
+      },
+      {
+        "src": "images/choc-profiteroles.jpg",
+        "caption": "Chocolate profiteroles"
+      }
+    ]
+  },
+  "order": {
+    "kicker": "Birthdays, parties & treats",
+    "title": "Order something special",
+    "intro": "Have a question, some feedback, or a cake idea for a special day? Don't hesitate to reach out. Tell us what you're dreaming of and we'll get back to you."
+  },
+  "thanks": {
+    "title": "Thank you, people of Earth!",
+    "p1": "Thanks for visiting! We hope you're leaving inspired to treat yourself.",
+    "p2": "If you're craving more, don't hesitate to reach out. I would love to sweeten your day even more!"
+  }
+}
