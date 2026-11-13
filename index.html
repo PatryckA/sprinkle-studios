@@ -308,7 +308,7 @@
           <img src="images/jam-heart-biscuits.jpg" alt="Round biscuits with jam heart centres" loading="lazy">
           <h3>Cookies</h3>
           <p>Jam hearts, reindeer and flower biscuits that are almost too cute to eat.</p>
-          <a class="btn btn-pink pop" href="#order" data-choice="Cookies &amp; biscuits">Order<span class="lg"> cookies</span></a>
+          <a class="btn btn-pink pop" href="#order" data-choice="Cookies">Order<span class="lg"> cookies</span></a>
         </article>
         <article class="treat reveal">
           <img src="images/rainbow-cupcakes.jpg" alt="Trays of rainbow and Easter cupcakes" loading="lazy">
@@ -320,7 +320,7 @@
           <img src="images/dog-biscuits.jpg" alt="Biscuits shaped like puppy faces" loading="lazy">
           <h3>Cute biscuits</h3>
           <p>Biscuits with cheeky little faces that always make people smile.</p>
-          <a class="btn btn-pink pop" href="#order" data-choice="Biscuits">Order<span class="lg"> cute biscuits</span></a>
+          <a class="btn btn-pink pop" href="#order" data-choice="Cookies">Order<span class="lg"> cute biscuits</span></a>
         </article>
       </div>
     </div>
@@ -474,8 +474,8 @@ const GOOGLE_FORM_FIELDS = {
 };
 // The choices must match the Google Form options exactly.
 // How a choice is shown on the website (if different from the Google Form wording).
-const CHOICE_LABELS = { "Biscuits": "Cute biscuits" };
-const ORDER_CHOICES = ["Cupcakes", "Cookies & biscuits", "Biscuits", "Birthday or party cake", "Just a question or feedback"];
+const CHOICE_LABELS = {};
+const ORDER_CHOICES = ["Cupcakes", "Cookies", "Birthday or party cake", "Just a question or feedback"];
 
 /* ========================================================= */
 
@@ -622,10 +622,10 @@ document.querySelectorAll(".pop").forEach(b => b.addEventListener("click", e => 
   const t = new Date(); const todayStr = `${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`;
   dateEl.min = todayStr;
 
-  [...ORDER_CHOICES, "Something else"].forEach((c, i) => {
+  [...ORDER_CHOICES, "Other"].forEach((c, i) => {
     const l = document.createElement("label"); l.className = "chip";
     const label = CHOICE_LABELS[c] || c;
-    l.innerHTML = `<input type="checkbox" name="what" value="${c === "Something else" ? "__other_option__" : c}"><span>${label}</span>`;
+    l.innerHTML = `<input type="checkbox" name="what" value="${c === "Other" ? "__other_option__" : c}"><span>${label}</span>`;
     chips.appendChild(l);
   });
   chips.addEventListener("change", e => {
@@ -665,7 +665,7 @@ document.querySelectorAll(".pop").forEach(b => b.addEventListener("click", e => 
     ["name","phone","email","people","ideas","else"].forEach(k => { if (val(k)) data.append(F[k], val(k)); });
     if (val("date")){ const [y,m,d] = val("date").split("-"); data.append(F.date+"_year", y); data.append(F.date+"_month", m); data.append(F.date+"_day", d); }
     form.querySelectorAll('input[name="what"]:checked').forEach(c => data.append(F.what, c.value));
-    if (form.querySelector('input[value="__other_option__"]:checked')) data.append(F.what+".other_option_response", val("other") || "Something else");
+    if (form.querySelector('input[value="__other_option__"]:checked')) data.append(F.what+".other_option_response", val("other") || "Other");
     btn.disabled = true; btn.textContent = "Sending...";
     try {
       await fetch(`https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`, { method:"POST", mode:"no-cors", body:data });
