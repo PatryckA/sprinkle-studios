@@ -415,7 +415,7 @@ document.querySelectorAll(".pop").forEach(b => b.addEventListener("click", e => 
       const media = p.video
         ? `<video src="${p.video}" poster="${p.poster || ""}" ${reduceMotion ? "controls" : "autoplay"} muted loop playsinline preload="metadata" aria-label="${p.caption || "Bake video"}"></video><span class="play-badge">Video</span>`
         : `<img src="${p.src}" alt="${p.caption || "A Sprinkle Studios bake"}" loading="lazy">`;
-      f.innerHTML = media + (p.caption ? `<figcaption>${p.caption}</figcaption>` : "");
+      f.innerHTML = media;  // captions are used as alt text only
       grid.appendChild(f);
     });
     if (MORE_COMING){
