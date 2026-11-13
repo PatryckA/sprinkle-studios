@@ -201,6 +201,23 @@
   footer{background:var(--pink);color:#FFD6E6;text-align:center;padding:10px 20px 36px;font-size:.9rem}
   footer a{color:#fff}
 
+  /* Lightbox */
+  .zoomable{cursor:zoom-in}
+  .lb{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(74,34,54,.88);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:60px 70px;touch-action:pan-y}
+  .lb.open{display:flex;animation:lbFade .25s ease}
+  @keyframes lbFade{from{opacity:0}to{opacity:1}}
+  .lb figure{margin:0;max-width:100%;max-height:100%;display:flex}
+  .lb img,.lb video{max-width:min(92vw,900px);max-height:84vh;border-radius:22px;box-shadow:0 20px 60px rgba(0,0,0,.45);border:6px solid #fff;background:#fff;animation:lbPop .35s cubic-bezier(.3,1.5,.5,1)}
+  @keyframes lbPop{from{transform:scale(.85) rotate(-2deg)}to{transform:none}}
+  .lb button{position:absolute;border:0;cursor:pointer;background:#fff;color:var(--pink-dark);font:900 1.5rem/1 Nunito,sans-serif;width:48px;height:48px;border-radius:50%;box-shadow:0 6px 18px rgba(0,0,0,.25);display:grid;place-items:center;transition:transform .2s cubic-bezier(.3,1.8,.5,1),background .2s}
+  .lb button[hidden]{display:none}
+  .lb button:hover{transform:scale(1.1);background:var(--pink);color:#fff}
+  .lb .lb-close{top:16px;right:16px}
+  .lb .lb-prev{left:14px;top:50%;margin-top:-24px}
+  .lb .lb-next{right:14px;top:50%;margin-top:-24px}
+  .lb .lb-count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:#FFD6E6;font-weight:800;font-size:.9rem}
+  @media (max-width:600px){.lb{padding:60px 10px}.lb .lb-prev,.lb .lb-next{top:auto;bottom:14px;margin:0}.lb .lb-prev{left:calc(50% - 110px)}.lb .lb-next{right:calc(50% - 110px)}.lb .lb-count{bottom:28px}}
+
   /* Confetti */
   .confetti{position:fixed;width:6px;height:16px;border-radius:5px;pointer-events:none;z-index:999}
 
@@ -417,6 +434,14 @@
     </div>
   </section>
 </main>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <figure id="lbFig"></figure>
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-prev" id="lbPrev" aria-label="Previous photo">‹</button>
+  <button class="lb-next" id="lbNext" aria-label="Next photo">›</button>
+  <span class="lb-count" id="lbCount"></span>
+</div>
 
 <footer>
   <p>&copy; <span id="year">2026</span> Sprinkle Studios &middot; Baked with love in Newington, NSW</p>
@@ -674,6 +699,61 @@ fetch("content.json?v=" + Date.now(), {cache: "no-store"})
 })();
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// Lightbox: click a photo to see it bigger
+(function(){
+  const lb = document.getElementById("lightbox"), fig = document.getElementById("lbFig"), count = document.getElementById("lbCount");
+  const GROUPS = "#galleryGrid, .bts, .treat-grid, #portrait";
+  const PHOTO = ".tile img, .tile video, .polaroid img, .treat img, #portrait img";
+  let list = [], idx = 0, lastFocus = null;
+  const mark = () => { if (!SS.editing) document.querySelectorAll(PHOTO).forEach(el => el.classList.add("zoomable")); };
+  document.addEventListener("ss:ready", mark); mark();
+  new MutationObserver(mark).observe(document.getElementById("galleryGrid"), {childList: true});
+
+  function show(){
+    const el = list[idx];
+    if (el.tagName === "VIDEO"){
+      fig.innerHTML = `<video src="${el.getAttribute("src")}" ${reduceMotion ? "controls" : "autoplay"} muted loop playsinline aria-label="${esc(el.getAttribute("aria-label"))}"></video>`;
+    } else {
+      fig.innerHTML = `<img src="${el.currentSrc || el.src}" alt="${esc(el.alt)}">`;
+    }
+    const many = list.length > 1;
+    document.getElementById("lbPrev").hidden = document.getElementById("lbNext").hidden = !many;
+    count.textContent = many ? `${idx + 1} of ${list.length}` : "";
+  }
+  function open(el){
+    const group = el.closest(GROUPS);
+    list = group ? [...group.querySelectorAll(PHOTO)].filter(x => group.contains(x)) : [el];
+    idx = Math.max(0, list.indexOf(el));
+    lastFocus = document.activeElement;
+    show(); lb.classList.add("open"); document.body.style.overflow = "hidden";
+    document.getElementById("lbClose").focus();
+  }
+  function close(){ lb.classList.remove("open"); fig.innerHTML = ""; document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
+  const step = d => { idx = (idx + d + list.length) % list.length; show(); };
+
+  document.addEventListener("click", e => {
+    if (SS.editing) return;
+    const el = e.target.closest(PHOTO); if (el) open(el);
+  });
+  document.getElementById("lbClose").addEventListener("click", close);
+  document.getElementById("lbPrev").addEventListener("click", e => { e.stopPropagation(); step(-1); });
+  document.getElementById("lbNext").addEventListener("click", e => { e.stopPropagation(); step(1); });
+  lb.addEventListener("click", e => { if (e.target === lb || e.target === fig) close(); });
+  document.addEventListener("keydown", e => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowLeft") step(-1);
+    else if (e.key === "ArrowRight") step(1);
+  });
+  let x0 = null;   // swipe on phones
+  lb.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, {passive: true});
+  lb.addEventListener("touchend", e => {
+    if (x0 === null || list.length < 2) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+  });
+})();
 
 // Scroll reveal (re-run after content renders)
 SS.observeReveals = function(){
