@@ -124,7 +124,7 @@
   .treat .btn{padding:9px 18px;font-size:.92rem;margin:0}
   .treat .tag-unused{display:inline-block;background:var(--pink);color:#fff;font-weight:800;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin:-6px 0 8px}
   @media (max-width:900px){.treat-grid{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:480px){.treat-grid{gap:12px}.treat{padding:16px 10px}.treat img{width:110px;height:110px}.treat h3{font-size:1.2rem}.treat p{font-size:.88rem}.treat .lg{display:none}}
+  @media (max-width:480px){.treat-grid{gap:12px}.treat{padding:16px 10px}.treat img{width:110px;height:110px}.treat h3{font-size:1.2rem}.treat p{font-size:.88rem}.treat .btn{font-size:.82rem;padding:8px 12px;line-height:1.2;text-align:center}}
 
   /* Gallery */
   .gallery{background:var(--cream)}
@@ -221,10 +221,10 @@
   <nav aria-label="Main">
     <a class="brand" href="#top" aria-label="Sprinkle Studios home"><img src="logo.png" alt="Sprinkle Studios"></a>
     <ul>
-      <li><a href="#markets">Find us</a></li>
-      <li><a href="#about">Meet Maddy</a></li>
-      <li><a href="#gallery">Bakes</a></li>
-      <li><a href="#order" class="cta">Order</a></li>
+      <li><a href="#markets"><span data-key="nav.markets">Find us</span></a></li>
+      <li><a href="#about"><span data-key="nav.about">Meet Maddy</span></a></li>
+      <li><a href="#gallery"><span data-key="nav.gallery">Bakes</span></a></li>
+      <li><a href="#order" class="cta"><span data-key="nav.order">Order</span></a></li>
     </ul>
   </nav>
 </header>
@@ -238,8 +238,8 @@
         <h1>Sprinkle Studios</h1>
         <img class="hero-logo" src="logo.png" alt="Sprinkle Studios logo with a cupcake" id="heroLogo">
         <p class="tagline" data-key="hero.tagline">We're all about baking sweet treats that make you grin, from cupcakes to cookies and everything in between!</p>
-        <a class="btn btn-pink pop" href="#markets">Find our stall</a>
-        <a class="btn btn-orange pop" href="#order">Order a special cake</a>
+        <a class="btn btn-pink pop" href="#markets"><span data-key="hero.button1">Find our stall</span></a>
+        <a class="btn btn-orange pop" href="#order"><span data-key="hero.button2">Order a special cake</span></a>
       </div>
     </div>
   </section>
@@ -295,25 +295,25 @@
           <img src="images/pink-cookie-layer-cake.jpg" alt="A chocolate layer cake topped with pink cream and biscuits" loading="lazy" data-img="treats.items.0.img">
           <h3 data-key="treats.items.0.title">Cakes</h3>
           <p data-key="treats.items.0.text">Layer cakes, party cakes and themed creations, decorated just for your celebration.</p>
-          <a class="btn btn-pink pop" href="#order" data-choice="Birthday or party cake">Order<span class="lg"> a cake</span></a>
+          <a class="btn btn-pink pop" href="#order" data-choice="Birthday or party cake"><span data-key="treats.items.0.button">Order a cake</span></a>
         </article>
         <article class="treat reveal">
           <img src="images/jam-heart-biscuits.jpg" alt="Round biscuits with jam heart centres" loading="lazy" data-img="treats.items.1.img">
           <h3 data-key="treats.items.1.title">Cookies</h3>
           <p data-key="treats.items.1.text">Jam hearts, reindeer and flower biscuits that are almost too cute to eat.</p>
-          <a class="btn btn-pink pop" href="#order" data-choice="Cookies">Order<span class="lg"> cookies</span></a>
+          <a class="btn btn-pink pop" href="#order" data-choice="Cookies"><span data-key="treats.items.1.button">Order cookies</span></a>
         </article>
         <article class="treat reveal">
           <img src="images/rainbow-cupcakes.jpg" alt="Trays of rainbow and Easter cupcakes" loading="lazy" data-img="treats.items.2.img">
           <h3 data-key="treats.items.2.title">Cupcakes</h3>
           <p data-key="treats.items.2.text">Fluffy cupcakes piled high with swirly icing and fun toppers.</p>
-          <a class="btn btn-pink pop" href="#order" data-choice="Cupcakes">Order<span class="lg"> cupcakes</span></a>
+          <a class="btn btn-pink pop" href="#order" data-choice="Cupcakes"><span data-key="treats.items.2.button">Order cupcakes</span></a>
         </article>
         <article class="treat reveal">
           <img src="images/dog-biscuits.jpg" alt="Biscuits shaped like puppy faces" loading="lazy" data-img="treats.items.3.img">
           <h3 data-key="treats.items.3.title">Cute biscuits</h3>
           <p data-key="treats.items.3.text">Biscuits with cheeky little faces that always make people smile.</p>
-          <a class="btn btn-pink pop" href="#order" data-choice="Cookies">Order<span class="lg"> cute biscuits</span></a>
+          <a class="btn btn-pink pop" href="#order" data-choice="Cookies"><span data-key="treats.items.3.button">Order cute biscuits</span></a>
         </article>
       </div>
     </div>
@@ -388,19 +388,19 @@
           <div class="hp" aria-hidden="true"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off"></label></div>
           <div class="form-foot">
             <small>We'll only use your details to reply to your enquiry.</small>
-            <button class="btn btn-pink" type="submit" id="sendBtn">Send my enquiry</button>
+            <button class="btn btn-pink" type="submit" id="sendBtn"><span data-key="order.sendButton">Send my enquiry</span></button>
           </div>
         </form>
         <div class="form-msg" id="formThanks" role="status" aria-live="polite">
           <span class="big" aria-hidden="true">🧁</span>
           <h3>Thank you! Your enquiry is on its way.</h3>
           <p>Maddy will be in touch soon. In the meantime, come and say hi at the stall!</p>
-          <button class="btn btn-ghost" type="button" id="againBtn">Send another enquiry</button>
+          <button class="btn btn-ghost" type="button" id="againBtn"><span data-key="order.againButton">Send another enquiry</span></button>
         </div>
         <div class="form-msg error" id="formError" role="alert">
           <h3>Oh crumbs, that didn't send.</h3>
           <p>It looks like you're offline. Check your connection and try again. Your answers are still there.</p>
-          <button class="btn btn-pink" type="button" id="retryBtn">Try again</button>
+          <button class="btn btn-pink" type="button" id="retryBtn"><span data-key="order.retryButton">Try again</span></button>
         </div>
       </div>
     </div>
@@ -413,7 +413,7 @@
       <h2 data-key="thanks.title">Thank you, people of Earth!</h2>
       <p data-key="thanks.p1">Thanks for visiting! We hope you're leaving inspired to treat yourself.</p>
       <p data-key="thanks.p2">If you're craving more, don't hesitate to reach out. I would love to sweeten your day even more!</p>
-      <a class="btn btn-ghost pop" href="#top">Back to the top</a>
+      <a class="btn btn-ghost pop" href="#top"><span data-key="thanks.button">Back to the top</span></a>
     </div>
   </section>
 </main>
@@ -543,8 +543,8 @@ SS.renderMarkets = function(){
         <h3>${esc(m.name)}</h3>
         <p class="meta">${times}${esc(m.suburb)}${m.note ? "<br>" + esc(m.note) : ""}</p>
         <div class="actions">
-          <a class="btn btn-pink" href="${map}" target="_blank" rel="noopener">Map</a>
-          <button class="btn btn-ghost" type="button" data-i="${i}">Add to calendar</button>
+          <a class="btn btn-pink" href="${map}" target="_blank" rel="noopener"><span data-key="markets.mapButton">Map</span></a>
+          <button class="btn btn-ghost" type="button" data-i="${i}"><span data-key="markets.calendarButton">Add to calendar</span></button>
         </div>
       </div></article>`;
   }).join("");
@@ -647,7 +647,8 @@ fetch("content.json?v=" + Date.now(), {cache: "no-store"})
     if (val("date")){ const [y,m,d] = val("date").split("-"); data.append(F.date+"_year", y); data.append(F.date+"_month", m); data.append(F.date+"_day", d); }
     form.querySelectorAll('input[name="what"]:checked').forEach(c => data.append(F.what, c.value));
     if (form.querySelector('input[value="__other_option__"]:checked')) data.append(F.what+".other_option_response", val("other") || "Other");
-    btn.disabled = true; btn.textContent = "Sending...";
+    const lbl = btn.querySelector("span"), lblText = lbl.textContent;
+    btn.disabled = true; lbl.textContent = "Sending...";
     try {
       await fetch(`https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`, { method:"POST", mode:"no-cors", body:data });
       show(thanks);
@@ -657,7 +658,7 @@ fetch("content.json?v=" + Date.now(), {cache: "no-store"})
     } catch(err){
       show(errBox);
     } finally {
-      btn.disabled = false; btn.textContent = "Send my enquiry";
+      btn.disabled = false; lbl.textContent = lblText;
     }
   });
   document.getElementById("againBtn").addEventListener("click", () => show(form));

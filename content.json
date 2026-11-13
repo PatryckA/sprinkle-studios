@@ -1,7 +1,15 @@
 {
   "_note": "Edited by the Sprinkle Studios editor (admin.html). Text is plain text only.",
+  "nav": {
+    "markets": "Find us",
+    "about": "Meet Maddy",
+    "gallery": "Bakes",
+    "order": "Order"
+  },
   "hero": {
-    "tagline": "We're all about baking sweet treats that make you grin, from cupcakes to cookies and everything in between!"
+    "tagline": "We're all about baking sweet treats that make you grin, from cupcakes to cookies and everything in between!",
+    "button1": "Find our stall",
+    "button2": "Order a special cake"
   },
   "markets": {
     "kicker": "Come say hi",
@@ -16,7 +24,9 @@
         "suburb": "Newington",
         "note": "My first proper market stall!"
       }
-    ]
+    ],
+    "mapButton": "Map",
+    "calendarButton": "Add to calendar"
   },
   "about": {
     "kicker": "The baker",
@@ -80,7 +90,8 @@
           "alt": "A chocolate layer cake topped with pink cream and biscuits"
         },
         "title": "Cakes",
-        "text": "Layer cakes, party cakes and themed creations, decorated just for your celebration."
+        "text": "Layer cakes, party cakes and themed creations, decorated just for your celebration.",
+        "button": "Order a cake"
       },
       {
         "img": {
@@ -88,7 +99,8 @@
           "alt": "Round biscuits with jam heart centres"
         },
         "title": "Cookies",
-        "text": "Jam hearts, reindeer and flower biscuits that are almost too cute to eat."
+        "text": "Jam hearts, reindeer and flower biscuits that are almost too cute to eat.",
+        "button": "Order cookies"
       },
       {
         "img": {
@@ -96,7 +108,8 @@
           "alt": "Trays of rainbow and Easter cupcakes"
         },
         "title": "Cupcakes",
-        "text": "Fluffy cupcakes piled high with swirly icing and fun toppers."
+        "text": "Fluffy cupcakes piled high with swirly icing and fun toppers.",
+        "button": "Order cupcakes"
       },
       {
         "img": {
@@ -104,7 +117,8 @@
           "alt": "Biscuits shaped like puppy faces"
         },
         "title": "Cute biscuits",
-        "text": "Biscuits with cheeky little faces that always make people smile."
+        "text": "Biscuits with cheeky little faces that always make people smile.",
+        "button": "Order cute biscuits"
       }
     ]
   },
@@ -171,11 +185,15 @@
   "order": {
     "kicker": "Birthdays, parties & treats",
     "title": "Order something special",
-    "intro": "Have a question, some feedback, or a cake idea for a special day? Don't hesitate to reach out. Tell us what you're dreaming of and we'll get back to you."
+    "intro": "Have a question, some feedback, or a cake idea for a special day? Don't hesitate to reach out. Tell us what you're dreaming of and we'll get back to you.",
+    "sendButton": "Send my enquiry",
+    "againButton": "Send another enquiry",
+    "retryButton": "Try again"
   },
   "thanks": {
     "title": "Thank you, people of Earth!",
     "p1": "Thanks for visiting! We hope you're leaving inspired to treat yourself.",
-    "p2": "If you're craving more, don't hesitate to reach out. I would love to sweeten your day even more!"
+    "p2": "If you're craving more, don't hesitate to reach out. I would love to sweeten your day even more!",
+    "button": "Back to the top"
   }
 }

@@ -127,7 +127,7 @@
       <div class="panel">
         <h2>How to edit</h2>
         <ul class="tips">
-          <li><b>Words:</b> click any words on the page and type.</li>
+          <li><b>Words and buttons:</b> click any words on the page, including button labels, and type.</li>
           <li><b>Photos:</b> click a photo to swap it.</li>
           <li><b>Gallery:</b> use the buttons on each photo to move or remove it, or the big + tile to add one.</li>
           <li>Markets and your favourites list are below.</li>
@@ -275,6 +275,9 @@ const EDIT_CSS = `
   [data-key]{outline:2px dashed transparent;outline-offset:3px;border-radius:6px;cursor:text;transition:outline-color .15s,background .15s}
   [data-key]:hover{outline-color:rgba(228,47,117,.55)}
   [data-key]:focus{outline:2px solid #E42F75;background:rgba(255,255,255,.75)}
+  a [data-key], button [data-key]{cursor:text;padding:0 2px}
+  .btn [data-key]:focus, nav a [data-key]:focus{background:rgba(255,255,255,.3);outline-color:#fff}
+  .btn-ghost [data-key]:focus, nav a:not(.cta) [data-key]:focus{background:#FFF1F6;outline-color:#E42F75}
   .thanks [data-key]:focus{background:rgba(0,0,0,.12)}
   img[data-img], .tile img{cursor:pointer;transition:filter .15s, outline-color .15s;outline:4px solid transparent;outline-offset:-4px}
   img[data-img]:hover, .tile img:hover{filter:brightness(.88);outline-color:#F3A647}
@@ -295,6 +298,7 @@ function decorate(){
     siteDoc.addEventListener("click", e => {
       const a = e.target.closest("a[href]");
       if (a && !(a.getAttribute("href") || "").startsWith("#")) e.preventDefault();
+      if (e.target.closest("[data-key]") && e.target.closest("a, button")){ e.preventDefault(); e.stopPropagation(); return; }  // editing a button label
       if (e.target.closest(".sform button, .ticket button")) e.preventDefault();
     }, true);
     siteDoc.addEventListener("submit", e => e.preventDefault(), true);
@@ -305,6 +309,7 @@ function decorate(){
       setDirty();
     });
     siteDoc.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.closest && e.target.closest("[data-key]")){ e.preventDefault(); e.target.blur(); } });
+    siteDoc.addEventListener("keyup", e => { if (e.key === " " && e.target.closest && e.target.closest("[data-key]")) e.preventDefault(); }, true);
     siteDoc.addEventListener("paste", e => {
       if (!(e.target.closest && e.target.closest("[data-key]"))) return;
       e.preventDefault(); siteDoc.execCommand("insertText", false, (e.clipboardData.getData("text/plain") || "").replace(/\s+/g, " "));
